@@ -41,13 +41,13 @@
   #leistungen .service:nth-child(3),#leistungen .service:nth-child(6){margin:0}
 }
 @media(max-width:640px){
-  #leistungen .section-heading{margin-bottom:36px}
-  #leistungen .service-grid{grid-template-columns:1fr;gap:14px}
-  #leistungen .service,#leistungen .service-featured,#leistungen .service-featured:first-child,#leistungen .service-featured:nth-child(2){grid-column:auto;margin:0;min-height:auto;padding:27px 24px}
-  #leistungen .service-featured{padding:32px 26px}
-  #leistungen .service-featured .service-title{display:flex;margin-bottom:22px}
-  #leistungen .service-featured .icon{width:44px;height:44px;margin:0}
-  #leistungen .service-featured h3{font-size:1.3rem}
+  #leistungen .section-heading{margin-bottom:32px}
+  #leistungen .service-grid{grid-template-columns:1fr;gap:18px}
+  #leistungen .service,#leistungen .service-featured,#leistungen .service-featured:first-child,#leistungen .service-featured:nth-child(2){grid-column:auto;margin:0;min-height:0;padding:24px}
+  #leistungen .service-title,#leistungen .service-featured .service-title{display:flex;gap:14px;margin-bottom:16px}
+  #leistungen .service-featured .icon{width:42px;height:42px;margin:0}
+  #leistungen .service h3,#leistungen .service-featured h3{font-size:1.15rem;line-height:1.25}
+  #leistungen .service p,#leistungen .service-featured p{font-size:.9rem;line-height:1.6}
 }
 
 /* Der Ablauf bleibt ruhig, wird aber als zusammenhaengender Prozess lesbar. */
@@ -61,14 +61,15 @@
   .steps h3{margin-top:34px}
 }
 @media(max-width:640px){
-  .steps{display:block;margin-top:44px;padding-left:18px}
+  .process h2{max-width:18rem;font-size:clamp(2rem,10vw,2.35rem)}
+  .steps{display:block;margin-top:36px;padding-left:18px}
   .steps:before{top:0;bottom:0;left:0;right:auto;border-top:0;border-left:1px solid rgba(168,202,185,.32)}
-  .steps article,.steps article+article{grid-template-columns:40px 1fr;gap:14px;min-height:auto;padding:0 0 28px;border:0}
+  .steps article,.steps article+article{grid-template-columns:40px minmax(0,1fr);gap:12px;min-height:0;padding:0 0 24px;border:0}
   .steps article:last-child{padding-bottom:0}
   .steps span{margin-left:-18px;padding:0 10px 0 18px;line-height:1.5}
   .steps h3{margin:0 0 6px}
   .steps p{max-width:31rem}
-  .process-claim{margin-top:48px;padding-top:40px;font-size:1.4rem}
+  .process-claim{max-width:25rem;margin:40px auto 0;padding:34px 12px 0;font-size:clamp(1.08rem,5.2vw,1.3rem);line-height:1.45}
 }
 
 /* Persönlicher Ansprechpartner */
@@ -93,12 +94,22 @@
   #ueber-mich .portrait-frame{height:500px}
 }
 @media(max-width:800px){
-  #ueber-mich .about-grid{gap:50px}
-  #ueber-mich .portrait{width:min(100%,520px);max-width:none}
+  #ueber-mich .about-grid{grid-template-columns:minmax(0,1fr);gap:0}
+  #ueber-mich .about-copy{display:contents}
+  #ueber-mich .about-copy>.eyebrow{order:1}
+  #ueber-mich .about-copy>h2{order:2}
+  #ueber-mich .portrait{order:3;width:min(78%,520px);max-width:none;margin:8px 0 36px}
+  #ueber-mich .about-text{order:4;max-width:100%}
+  #ueber-mich .competence-points{order:5;max-width:100%;margin-top:24px}
+  #ueber-mich .signature{order:6;margin-top:26px}
   #ueber-mich .portrait-frame{height:auto;aspect-ratio:4/5}
-  #ueber-mich .about-copy{max-width:590px}
+  #ueber-mich .about-copy h2{max-width:100%;margin-bottom:26px}
 }
-@media(max-width:440px){#ueber-mich .portrait-frame{aspect-ratio:1/1.18}}
+@media(max-width:440px){
+  #ueber-mich .about-copy h2{font-size:clamp(2.25rem,11vw,2.8rem)}
+  #ueber-mich .portrait{width:88%;margin-bottom:32px}
+  #ueber-mich .portrait-frame{aspect-ratio:1/1.18}
+}
 
 /* Responsiver Website-Auftritt im Hero */
 .site-showcase{position:relative;isolation:isolate;width:116%;margin-left:-8%;padding:34px 28px 54px 0}
