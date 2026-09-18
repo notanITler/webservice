@@ -10,6 +10,7 @@ const checkedFiles = [
   'src/pages/datenschutz.astro',
   'src/layouts/BaseLayout.astro',
   'src/components/Header.astro',
+  'src/components/HeroShowcase.astro',
   'src/components/Faq.astro',
   'src/components/Icon.astro',
   'src/components/PriceCard.astro',

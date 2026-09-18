@@ -1,0 +1,41 @@
+[
+  {
+    "viewport": 390,
+    "width": 329.359375,
+    "height": 344.90625,
+    "ratio": 1.047203377769344,
+    "position": "relative",
+    "flexShrink": "1",
+    "transform": "none",
+    "boxSizing": "border-box",
+    "padding": "30px 22px 26px",
+    "heading": "31.2px",
+    "parentDisplay": "block"
+  },
+  {
+    "viewport": 900,
+    "width": 118,
+    "height": 325.96875,
+    "ratio": 2.762447033898305,
+    "position": "absolute",
+    "flexShrink": "1",
+    "transform": "none",
+    "boxSizing": "border-box",
+    "padding": "22px 12px 19px",
+    "heading": "17.28px",
+    "parentDisplay": "block"
+  },
+  {
+    "viewport": 1440,
+    "width": 135,
+    "height": 325.96875,
+    "ratio": 2.4145833333333333,
+    "position": "absolute",
+    "flexShrink": "1",
+    "transform": "none",
+    "boxSizing": "border-box",
+    "padding": "22px 12px 19px",
+    "heading": "17.28px",
+    "parentDisplay": "block"
+  }
+]

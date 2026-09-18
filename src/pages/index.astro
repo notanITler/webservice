@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Icon from '../components/Icon.astro';
 import PriceCard from '../components/PriceCard.astro';
 import Faq from '../components/Faq.astro';
+import HeroShowcase from '../components/HeroShowcase.astro';
 
 const services = [
   { icon: 'layout', title: 'Professioneller Auftritt', text: 'Ein individuelles Design, das zu Ihrem Unternehmen passt und Vertrauen schafft.', featured: true },
@@ -29,28 +30,7 @@ const pro = ['Alles aus dem Website-Paket', 'Strukturierte Projektanfragen', 'In
           <p class="hero-price"><strong>0 € Erstellung</strong><span>·</span> ab 79 € / Monat</p>
           <div class="button-row"><a class="button" href="#anfrage">Website anfragen <span>→</span></a><a class="text-link" href="#ablauf">So funktioniert’s <span>↓</span></a></div>
         </div>
-        <div class="site-showcase" aria-label="Responsive Website für den fiktiven Handwerksbetrieb Hansen Haustechnik">
-          <div class="desktop-site">
-            <div class="site-windowbar" aria-hidden="true"><span></span><span></span><span></span><small>hansen-haustechnik.de</small></div>
-            <div class="trade-nav"><b><i>H</i> Hansen <span>Haustechnik</span></b><div><span>Leistungen</span><span>Referenzen</span><span>Über uns</span><span>Kontakt</span></div><strong>0511 123 45 67</strong></div>
-            <div class="trade-hero">
-              <div class="trade-copy">
-                <small>Ihr Meisterbetrieb für moderne Haustechnik</small>
-                <h2>Bäder, die zu Ihrem Zuhause passen.</h2>
-                <p>Planung, Sanierung und Installation aus einer Hand.</p>
-                <span class="trade-button">Projekt anfragen <b>→</b></span>
-              </div>
-              <div class="trade-proof"><span>Seit 1998 in Hannover</span><b>Meisterqualität.<br />Persönlich geplant.</b><small>Von der ersten Idee bis zur fertigen Installation begleiten wir Ihr Projekt zuverlässig.</small></div>
-            </div>
-            <div class="trade-services"><span><b>01</b>Badsanierung<small>Komplett aus einer Hand</small></span><span><b>02</b>Heizung<small>Effizient &amp; zuverlässig</small></span><span><b>03</b>Wärmepumpe<small>Zukunftssicher heizen</small></span></div>
-          </div>
-          <div class="mobile-site" aria-hidden="true">
-            <div class="mobile-top"><b><i>H</i> Hansen</b><span></span></div>
-            <div class="mobile-content"><small>Ihr Meisterbetrieb für moderne Haustechnik</small><h3>Bäder, die zu Ihrem Zuhause passen.</h3><p>Planung, Sanierung und Installation aus einer Hand.</p><strong>Projekt anfragen →</strong></div>
-            <div class="mobile-services"><span>Badsanierung</span><span>Heizung</span><span>Wärmepumpe</span></div>
-          </div>
-          <div class="project-request" aria-hidden="true"><span>Neue Projektanfrage</span><b>Badsanierung</b><small>Hannover · 3 Fotos</small></div>
-        </div>
+        <HeroShowcase />
       </div>
     </section>
 
