@@ -1,4 +1,4 @@
-# [Nachname] Webservice
+# Gehrke Webservice
 
 Eine schnelle, responsive Unternehmenswebsite für einen persönlichen Webservice-Anbieter. Die Seite ist bewusst schlank aufgebaut und lässt sich ohne Datenbank, CMS oder Server-Anwendung statisch hosten.
 
@@ -91,7 +91,7 @@ Der Dashboard-Build erzeugt zuerst `dist/`; anschließend liest `wrangler deploy
 
 ### Custom Domain
 
-Eine eigene Domain wird später im Cloudflare-Dashboard unter **Workers & Pages → gehrke-webservice → Settings → Domains & Routes** hinzugefügt. Danach müssen alle `[domain]`-Platzhalter ersetzt und die echte Website-URL als `site` in `astro.config.mjs` ergänzt werden. Canonical URL, Open-Graph-URL, `robots.txt` und `sitemap.xml` müssen dieselbe Domain verwenden.
+Eine eigene Domain wird später im Cloudflare-Dashboard unter **Workers & Pages → gehrke-webservice → Settings → Domains & Routes** hinzugefügt. Canonical URL, Open-Graph-URL, `robots.txt` und `sitemap.xml` müssen dieselbe Domain verwenden.
 
 ### Preview-Checkliste
 
@@ -99,14 +99,10 @@ Vor dem ersten Preview-Deployment sollten `npm install`, `npm run lint`, `npm ru
 
 ## Vor Veröffentlichung ersetzen
 
-- `[Nachname]` durch den tatsächlichen Nachnamen
-- `[domain]` und `www.[domain].de` durch die echte Domain
-- `david@[domain].de` durch die echte E-Mail-Adresse
 - Portrait-Platzhalter durch ein freigegebenes Portraitfoto
 - Website-Mockup durch echte Arbeitsbeispiele, sobald vorhanden
 - Impressumsangaben inklusive Name, Anschrift, Telefon und Verantwortlichkeit
 - Datenschutz-Platzhalter passend zu Hosting und Kontaktweg; rechtlich prüfen lassen
-- `site` in `astro.config.mjs`, Canonical-/Open-Graph-URL, `robots.txt` und `sitemap.xml`
 
 ## Bekannte Einschränkungen
 
