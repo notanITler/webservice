@@ -11,3 +11,40 @@
 .demo-project{height:265px;position:relative;overflow:hidden;background:linear-gradient(145deg,#dbe4df 0 58%,#c3d0c9 58%);display:flex;align-items:flex-end;padding:18px}.demo-project:before{content:"";position:absolute;width:90px;height:90px;border-radius:50%;top:24px;right:24px;background:rgba(255,255,255,.52)}.demo-roof{position:absolute;width:175px;height:85px;left:21px;top:78px;background:#6e8177;clip-path:polygon(50% 0,100% 70%,90% 70%,90% 100%,10% 100%,10% 70%,0 70%)}.demo-wall{position:absolute;width:125px;height:100px;left:46px;top:137px;background:#f1f0e9;display:flex;align-items:flex-end;justify-content:center;gap:12px;padding:0 12px}.demo-wall i{width:24px;height:45px;background:#9cafaa}.demo-wall i:nth-child(2){height:65px;background:#66796f}.demo-project small{position:relative;z-index:2;color:white;font-size:.52rem;line-height:1.45;font-weight:650;text-shadow:0 1px 8px rgba(24,26,24,.3)}.demo-footer{display:flex;justify-content:space-between;padding:14px 25px;background:#f5f4ef;color:#69706b;font-size:.5rem}.demo-footer b{color:var(--green-dark)}
 .trust{background:rgba(255,255,255,.35);padding:25px 0}.trust p{font-size:.91rem;font-weight:600}.trust span{font-weight:800}
 :focus-visible{outline:3px solid #bd7d25;outline-offset:4px}@media(max-width:800px){.container{width:min(100% - 32px,var(--max))}.site-header{height:70px}.header-cta{display:none}.menu-button{display:flex;flex-direction:column;gap:5px;padding:12px}.menu-button span:not(.sr-only){display:block;width:23px;border-top:2px solid}.nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:var(--bg);padding:20px 16px 24px;border-bottom:1px solid var(--line);flex-direction:column;gap:0}.nav-links a{padding:11px 0}.nav-links a:after{bottom:5px}.nav-links.is-open{display:flex}.hero{padding:65px 0 55px}.hero-grid,.section-heading,.about-grid,.monthly-grid,.faq-grid{grid-template-columns:1fr;gap:50px}.hero-grid{gap:40px}.hero-copy .eyebrow{font-size:.65rem}h1{font-size:clamp(2.8rem,13vw,4rem)}h2{font-size:2.35rem}.lead{font-size:1.05rem}.button-row{gap:22px;flex-wrap:wrap}.mockup-wrap{width:100%;margin:auto;padding-top:25px}.demo-body{min-height:280px;padding:25px 20px;gap:15px}.demo-project{height:210px}.demo-roof{transform:scale(.78);transform-origin:left bottom;top:60px}.demo-wall{transform:scale(.78);transform-origin:left top;top:107px}.demo-nav div{display:none}.demo-footer{gap:15px}.trust{padding:12px 0}.trust-grid{grid-template-columns:1fr}.trust p{text-align:left;padding:9px 0}.trust p+p{border-left:0;border-top:1px solid var(--line)}section:not(.hero,.final-cta){padding:80px 0}.section-heading{margin-bottom:40px}.service-grid{grid-template-columns:1fr}.service{min-height:auto}.steps{grid-template-columns:1fr;border-top:1px solid #547060}.steps article,.steps article+article{display:grid;grid-template-columns:45px 1fr;gap:15px;min-height:auto;padding:24px 0;border-right:0;border-bottom:1px solid #547060}.steps h3{margin:0 0 5px}.steps p{margin:0}.process blockquote{margin-top:55px;padding-top:50px}.about-grid{gap:45px}.portrait{height:450px}.price-grid{grid-template-columns:1fr}.price-card{padding:35px 25px}.price-card ul{min-height:auto;margin-bottom:30px}.faq-grid{gap:35px}.final-cta{padding:80px 0}.footer-top{grid-template-columns:1fr 1fr}.footer-top>div:first-child{grid-column:1/-1}.footer-bottom{flex-direction:column;gap:5px}.legal{padding:70px 0}.legal h1{font-size:3rem}}@media(max-width:440px){.demo-body{grid-template-columns:1.05fr .95fr;padding:20px 14px}.demo-copy h2{font-size:1.3rem}.demo-copy p br{display:none}.demo-project{height:190px}.demo-footer span{display:none}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* Eigenständige, ruhig gegliederte Nutzenmodule statt eines gleichmäßigen Tabellenrasters. */
+#leistungen .section-heading{margin-bottom:58px}
+#leistungen .section-heading>p{font-size:1.02rem;line-height:1.75}
+#leistungen .service-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;border:0}
+#leistungen .service{grid-column:span 3;min-height:205px;padding:27px 25px 25px;background:rgba(255,255,255,.52);border:1px solid rgba(217,217,210,.72);border-radius:8px;transition:transform .2s ease,background-color .2s ease,box-shadow .2s ease}
+#leistungen .service:nth-child(3){margin-left:18px}
+#leistungen .service:nth-child(6){margin-right:18px}
+#leistungen .service-featured{grid-column:span 6;min-height:285px;padding:40px 38px;background:var(--white);border:0;box-shadow:0 14px 40px rgba(24,26,24,.055)}
+#leistungen .service-featured:first-child{grid-column:span 7}
+#leistungen .service-featured:nth-child(2){grid-column:span 5;margin-top:30px}
+#leistungen .service-title{display:flex;align-items:center;gap:15px;margin-bottom:24px}
+#leistungen .service .icon{flex:0 0 auto;width:40px;height:40px;margin:0;border-radius:50%;background:var(--pale)}
+#leistungen .service svg{width:19px}
+#leistungen .service h3{margin:0;font-size:1.08rem}
+#leistungen .service p{max-width:29rem;margin:0;color:var(--muted);font-size:.92rem;line-height:1.7}
+#leistungen .service-featured .service-title{display:block;margin-bottom:30px}
+#leistungen .service-featured .icon{width:48px;height:48px;margin-bottom:32px}
+#leistungen .service-featured svg{width:22px}
+#leistungen .service-featured h3{font-size:clamp(1.5rem,2.1vw,2rem);line-height:1.2}
+#leistungen .service-featured p{font-size:1rem}
+@media(hover:hover){#leistungen .service:hover{transform:translateY(-3px);background:var(--white);box-shadow:0 14px 34px rgba(24,26,24,.07)}}
+@media(max-width:1000px) and (min-width:641px){
+  #leistungen .service-grid{grid-template-columns:repeat(2,1fr)}
+  #leistungen .service,#leistungen .service-featured,#leistungen .service-featured:first-child,#leistungen .service-featured:nth-child(2){grid-column:auto;margin:0;min-height:220px}
+  #leistungen .service-featured{min-height:265px}
+  #leistungen .service:nth-child(3),#leistungen .service:nth-child(6){margin:0}
+}
+@media(max-width:640px){
+  #leistungen .section-heading{margin-bottom:36px}
+  #leistungen .service-grid{grid-template-columns:1fr;gap:14px}
+  #leistungen .service,#leistungen .service-featured,#leistungen .service-featured:first-child,#leistungen .service-featured:nth-child(2){grid-column:auto;margin:0;min-height:auto;padding:27px 24px}
+  #leistungen .service-featured{padding:32px 26px}
+  #leistungen .service-featured .service-title{display:flex;margin-bottom:22px}
+  #leistungen .service-featured .icon{width:44px;height:44px;margin:0}
+  #leistungen .service-featured h3{font-size:1.3rem}
+}
