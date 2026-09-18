@@ -26,7 +26,7 @@ for (const width of widths) {
       expect(Math.abs(box.x + box.width / 2 - width / 2)).toBeLessThan(1);
     } else {
       await expect(showcase.locator('.preview-frame:visible')).toHaveCount(2);
-      expect(box.width).toBeGreaterThanOrEqual(176);
+      expect(box.width).toBeGreaterThanOrEqual(164);
       expect(ratio).toBeGreaterThanOrEqual(2);
       expect(ratio).toBeLessThanOrEqual(2.2);
       await expect(phone.locator('.site-windowbar')).toBeHidden();
@@ -35,6 +35,13 @@ for (const width of widths) {
       expect(box.y).toBeLessThan(desktop.y + desktop.height);
       const lines = await phone.locator('h3').evaluate(el => el.getBoundingClientRect().height / parseFloat(getComputedStyle(el).lineHeight));
       expect(lines).toBeLessThanOrEqual(3.1);
+      const request = await page.locator('.project-request').boundingBox();
+      const showcaseBox = await showcase.boundingBox();
+      // The request card stays next to the phone overlay and below the browser
+      // preview; no desktop-specific area is left unused beneath either card.
+      expect(request.y).toBeGreaterThanOrEqual(desktop.y + desktop.height - 1);
+      expect(Math.abs(request.x + request.width - box.x)).toBeLessThanOrEqual(2);
+      expect(showcaseBox.y + showcaseBox.height - Math.max(box.y + box.height, request.y + request.height)).toBeLessThanOrEqual(24);
     }
 
     for (const frame of await showcase.locator('.preview-frame:visible').all()) {

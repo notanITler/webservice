@@ -97,6 +97,12 @@ const variants = ['desktop', 'mobile'];
     .project-request{left:0;bottom:40px;padding:10px;gap:7px}
     .project-request i{display:none}
   }
+  @media(min-width:900px){
+    .site-showcase{padding:24px 24px 104px 0}
+    .site-showcase::before{inset:0 0 18px 5%}
+    .mobile-site{right:3%;bottom:18px;width:clamp(164px,12vw,184px)}
+    .project-request{left:auto;right:calc(clamp(164px,12vw,184px) + 3%);bottom:18px}
+  }
   @media(max-width:899px){
     .site-showcase{padding:10px 0 0}
     .site-showcase::before{inset:0 2% 5%;border-radius:18px}
