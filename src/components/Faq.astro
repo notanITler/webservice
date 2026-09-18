@@ -1,0 +1,17 @@
+---
+const items = [
+  ['Muss ich die Texte selbst schreiben?', 'Nein. Ich unterstütze Sie dabei, Ihre Leistungen klar auf den Punkt zu bringen, und erstelle die Texte auf Basis unseres Gesprächs.'],
+  ['Muss ich Bilder bereitstellen?', 'Nicht zwingend. Wir klären gemeinsam, welches Bildmaterial sinnvoll ist. Vorhandene gute Fotos können natürlich eingebunden werden.'],
+  ['Was bedeutet „bis zu 5 Seiten“?', 'Gemeint sind fünf eigenständige Inhaltsseiten, zum Beispiel Start, Leistungen, Über mich, Referenzen und Kontakt. Impressum und Datenschutz zählen nicht dazu.'],
+  ['Kann ich später Änderungen machen lassen?', 'Ja. Kleine laufende Änderungen sind je nach Paket bereits monatlich enthalten. Größere Anpassungen besprechen wir transparent vorab.'],
+  ['Gehört mir meine Domain?', 'Ja. Die Domain wird für Sie eingerichtet und bleibt Ihrem Unternehmen zugeordnet.'],
+  ['Wie lange dauert die Erstellung?', 'Der konkrete Zeitplan hängt vom Umfang und der Abstimmung ab. Nach dem Kennenlernen erhalten Sie eine realistische Einschätzung.'],
+  ['Warum gibt es 12 Monate Mindestlaufzeit?', 'Die monatliche Vergütung verteilt Erstellung, Betrieb und Betreuung planbar über die Laufzeit – ohne hohe Anfangsinvestition.'],
+  ['Was passiert bei Kündigung?', 'Nach der Mindestlaufzeit können Sie monatlich kündigen. Die genauen Regelungen werden vor Vertragsabschluss transparent festgehalten.'],
+  ['Was kostet eine zusätzliche Seite?', 'Zusätzliche Inhalte werden nach Umfang individuell und transparent angeboten.'],
+  ['Für wen lohnt sich Website Pro?', 'Für Betriebe, die Anfragen mit gezielten Fragen vorqualifizieren und Projekte ausführlicher präsentieren möchten.'],
+];
+---
+<div class="faq-list">
+  {items.map(([question, answer]) => <details><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}
+</div>

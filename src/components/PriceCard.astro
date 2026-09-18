@@ -1,0 +1,13 @@
+---
+interface Props { title: string; price: string; featured?: boolean; features: string[] }
+const { title, price, featured = false, features } = Astro.props;
+---
+<article class:list={["price-card", { featured }]}>
+  {featured && <span class="badge">Empfohlen</span>}
+  <p class="eyebrow">{title}</p>
+  <p class="price"><strong>{price} €</strong> <span>/ Monat</span></p>
+  <p class="setup">0 € Erstellung</p>
+  <div class="rule"></div>
+  <ul>{features.map((feature) => <li><span aria-hidden="true">✓</span>{feature}</li>)}</ul>
+  <a class:list={["button", { "button-dark": featured }]} href="#anfrage">{title} anfragen</a>
+</article>
