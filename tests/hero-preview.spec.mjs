@@ -17,7 +17,6 @@ for (const width of widths) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
     if (width < 900) {
       await expect(page.locator('.desktop-site')).toBeHidden();
-      await expect(page.locator('.project-request')).toBeHidden();
       await expect(showcase.locator('.preview-frame:visible')).toHaveCount(1);
       await expect(phone.locator('.site-windowbar')).toBeVisible();
       await expect(phone.locator('.site-windowbar')).toContainText('hansen-haustechnik.example');
@@ -37,13 +36,9 @@ for (const width of widths) {
       expect(box.y).toBeLessThan(desktop.y + desktop.height);
       const lines = await phone.locator('h3').evaluate(el => el.getBoundingClientRect().height / parseFloat(getComputedStyle(el).lineHeight));
       expect(lines).toBeLessThanOrEqual(3.1);
-      const request = await page.locator('.project-request').boundingBox();
       const showcaseBox = await showcase.boundingBox();
-      // The request card stays next to the phone overlay and below the browser
-      // preview; no desktop-specific area is left unused beneath either card.
-      expect(request.y).toBeGreaterThanOrEqual(desktop.y + desktop.height - 1);
-      expect(Math.abs(request.x + request.width - box.x)).toBeLessThanOrEqual(2);
-      expect(showcaseBox.y + showcaseBox.height - Math.max(box.y + box.height, request.y + request.height)).toBeLessThanOrEqual(24);
+      // The compact desktop composition ends directly beneath the phone.
+      expect(showcaseBox.y + showcaseBox.height - (box.y + box.height)).toBeLessThanOrEqual(24);
     }
 
     for (const frame of await showcase.locator('.preview-frame:visible').all()) {
@@ -68,7 +63,7 @@ for (const width of widths) {
         if (!node.textContent.trim() || !node.parentElement.checkVisibility()) continue;
         const range = document.createRange();
         range.selectNodeContents(node);
-        const frame = node.parentElement.closest('.preview-frame, .project-request');
+        const frame = node.parentElement.closest('.preview-frame');
         const bounds = frame.getBoundingClientRect();
         for (const rect of range.getClientRects()) {
           if (!rect.width || !rect.height) continue;
