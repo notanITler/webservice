@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="[Nachname] Webservice – Startseite"><span>[Nachname]</span> Webservice</a>
+    <nav aria-label="Hauptnavigation">
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="main-menu"><span></span><span></span><span></span><span class="sr-only">Menü öffnen</span></button>
+      <div class="nav-links" id="main-menu">
+        <a href="#leistungen">Leistungen</a><a href="#ablauf">Ablauf</a><a href="#preise">Preise</a><a href="#ueber-mich">Über mich</a><a href="#anfrage">Anfrage</a>
+      </div>
+    </nav>
+    <a class="button button-small header-cta" href="#anfrage">Website anfragen</a>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.menu-button');
+  const menu = document.querySelector<HTMLElement>('#main-menu');
+  button?.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!open));
+    menu?.classList.toggle('is-open', !open);
+  });
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    button?.setAttribute('aria-expanded', 'false');
+    menu.classList.remove('is-open');
+  }));
+</script>
