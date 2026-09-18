@@ -53,8 +53,10 @@ for (const pattern of trackingPatterns) {
   assert(!pattern.test(allSource), `Possible tracking integration found: ${pattern}`);
 }
 
-assert(index.includes('[Nachname]'), 'The surname placeholder must remain explicit.');
-assert(index.includes('david@[domain].de'), 'The email placeholder must remain explicit.');
+assert(index.includes('Gehrke Webservice'), 'The configured business name is missing.');
+assert(index.includes('david@gehrke-webservice.de'), 'The configured contact email is missing.');
+assert(!allSource.includes('[Nachname]'), 'The surname placeholder must be replaced.');
+assert(!allSource.includes('[domain]'), 'The domain placeholder must be replaced.');
 assert(
   sources.get('src/pages/impressum.astro').includes('Platzhalter – vor Veröffentlichung ersetzen'),
   'The legal notice must identify its placeholder content.',
@@ -63,6 +65,7 @@ assert(
   sources.get('src/pages/datenschutz.astro').includes('Platzhalter – vor Veröffentlichung rechtlich prüfen und ersetzen'),
   'The privacy notice must identify its placeholder content.',
 );
+assert(read('astro.config.mjs').includes("site: 'https://www.gehrke-webservice.de'"), 'The Astro site URL is missing or unexpected.');
 assert(read('astro.config.mjs').includes("output: 'static'"), 'Astro output must remain static.');
 
 const wrangler = JSON.parse(read('wrangler.jsonc'));
@@ -86,4 +89,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Verification passed: ${checkedFiles.length} source files, navigation, placeholders, imports, tracking, static output and Workers assets config checked.`);
+console.log(`Verification passed: ${checkedFiles.length} source files, navigation, branding, imports, tracking, site URL, static output and Workers assets config checked.`);
