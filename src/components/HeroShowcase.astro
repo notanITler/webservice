@@ -100,6 +100,21 @@ const variants = ['desktop', 'mobile'];
   @media(min-width:900px){
     .site-showcase{padding:24px 24px 104px 0}
     .site-showcase::before{inset:0 0 18px 5%}
+    .desktop-site{aspect-ratio:3 / 2;display:flex;flex-direction:column}
+    .desktop-site .site-windowbar{flex:none}
+    .desktop-site .demo-page{display:flex;flex:1;min-height:0;flex-direction:column}
+    .desktop-site .demo-nav{position:relative;z-index:1;flex:none;padding-right:34cqw}
+    .desktop-site .demo-main{flex:1;min-height:0;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:minmax(0,1fr) auto}
+    .desktop-site .demo-copy{align-self:center;padding:4cqw 4cqw 3cqw 5cqw}
+    .desktop-site .demo-copy h3{font-size:5.1cqw;margin:1.8cqw 0}
+    .desktop-site .demo-copy p{font-size:1.75cqw;margin-bottom:2.2cqw}
+    .desktop-site .demo-button{padding:1.6cqw 2cqw;font-size:1.55cqw}
+    .desktop-site .demo-photo{grid-column:2;grid-row:1}
+    .desktop-site .demo-services{grid-column:1 / -1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:2.3cqw 34cqw 2.3cqw 5cqw}
+    .desktop-site .demo-services>div+div{padding-left:3cqw;border-left:1px solid #e0e6dc}
+    .desktop-site .demo-services b{font-size:2.1cqw}
+    .desktop-site .demo-services span{font-size:1.45cqw}
+    .desktop-site .demo-next{width:auto;flex:none;flex-direction:row;gap:3cqw;padding:1.8cqw 34cqw 1.8cqw 5cqw;font-size:1.35cqw}
     .mobile-site{right:3%;bottom:18px;width:clamp(164px,12vw,184px)}
     .project-request{left:auto;right:calc(clamp(164px,12vw,184px) + 3%);bottom:18px}
   }

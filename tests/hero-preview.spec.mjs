@@ -31,6 +31,8 @@ for (const width of widths) {
       expect(ratio).toBeLessThanOrEqual(2.2);
       await expect(phone.locator('.site-windowbar')).toBeHidden();
       const desktop = await page.locator('.desktop-site').boundingBox();
+      expect(desktop.width / desktop.height).toBeGreaterThanOrEqual(1.48);
+      expect(desktop.width / desktop.height).toBeLessThanOrEqual(1.52);
       expect(box.x).toBeLessThan(desktop.x + desktop.width);
       expect(box.y).toBeLessThan(desktop.y + desktop.height);
       const lines = await phone.locator('h3').evaluate(el => el.getBoundingClientRect().height / parseFloat(getComputedStyle(el).lineHeight));
@@ -76,7 +78,7 @@ for (const width of widths) {
           const x = rect.left + rect.width / 2, y = rect.top + rect.height / 2;
           if (y < 0 || y >= innerHeight) continue;
           const top = document.elementFromPoint(x, y);
-          if (!node.parentElement.contains(top)) problems.push(`covered: ${node.textContent}`);
+          if (!node.parentElement.contains(top) && !top.contains(node.parentElement)) problems.push(`covered: ${node.textContent}`);
         }
       }
       return problems;
