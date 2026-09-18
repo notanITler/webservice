@@ -111,48 +111,12 @@
   #ueber-mich .portrait-frame{aspect-ratio:1/1.18}
 }
 
-/* Responsiver Website-Auftritt im Hero */
-.site-showcase{position:relative;isolation:isolate;width:116%;margin-left:-8%;padding:34px 28px 54px 0}
-.site-showcase:before{content:"";position:absolute;z-index:-1;inset:4px 0 18px 7%;border-radius:18px;background:#e2ece6}
-.desktop-site{overflow:hidden;background:#fff;border:1px solid rgba(33,76,59,.16);border-radius:9px;box-shadow:0 28px 64px rgba(28,52,41,.15)}
-.site-windowbar{height:28px;display:flex;align-items:center;gap:5px;padding:0 11px;background:#f1f2ef;border-bottom:1px solid #e0e4df}
-.site-windowbar>span{width:5px;height:5px;border-radius:50%;background:#aeb4af}.site-windowbar small{margin:auto;color:#858a85;font-size:.38rem;letter-spacing:.04em}
-.trade-nav{height:61px;display:flex;align-items:center;justify-content:space-between;padding:0 23px;border-bottom:1px solid #e9ece8;background:#fff;font-size:.47rem}
-.trade-nav>b{display:flex;align-items:center;font-size:.7rem;letter-spacing:-.02em}.trade-nav b i,.mobile-top i{display:grid;place-items:center;width:22px;height:22px;margin-right:7px;border-radius:50%;background:#174b42;color:#fff;font-style:normal;font-size:.65rem}.trade-nav b span{margin-left:3px;color:#477267;font-weight:500}.trade-nav>div{display:flex;gap:15px;color:#59635e;font-weight:650}.trade-nav>strong{padding:7px 9px;background:#174b42;color:#fff;font-size:.43rem}
-.trade-hero{display:grid;grid-template-columns:1.18fr .82fr;min-height:282px;background:#f7f4ed}
-.trade-copy{padding:41px 25px 30px 30px}.trade-copy>small,.mobile-content>small{display:block;color:#6c766f;font-size:.42rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase}.trade-copy h2{max-width:340px;margin:13px 0 13px;color:#193d35;font-size:2.12rem;line-height:1.02;letter-spacing:-.045em}.trade-copy p{max-width:230px;margin-bottom:21px;color:#5e6862;font-size:.62rem;line-height:1.5}.trade-button{display:inline-flex;gap:19px;padding:10px 12px;background:#b66b3f;color:#fff;font-size:.52rem;font-weight:750}.trade-button b{font-size:.67rem}
-.trade-proof{display:flex;flex-direction:column;justify-content:flex-end;padding:27px 24px;background:linear-gradient(155deg,#2d6156,#153f37);color:#fff}.trade-proof>span{margin-bottom:auto;font-size:.42rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#bcd2ca}.trade-proof>b{font-size:1.04rem;line-height:1.2}.trade-proof>small{margin-top:10px;color:#cfddd8;font-size:.48rem;line-height:1.5}
-.trade-services{display:grid;grid-template-columns:repeat(3,1fr);padding:0 23px;background:white}.trade-services>span{display:flex;flex-direction:column;padding:15px 14px 16px;font-size:.59rem;font-weight:750;border-right:1px solid #e4e8e3}.trade-services>span:last-child{border:0}.trade-services b{margin-bottom:3px;color:#b66b3f;font-size:.37rem}.trade-services small{margin-top:2px;color:#7b827e;font-size:.4rem;font-weight:500}
-.mobile-site{position:absolute;z-index:3;right:-1%;bottom:5px;width:135px;min-height:276px;overflow:hidden;border:6px solid #1b2823;border-radius:22px;background:#f7f4ed;box-shadow:0 22px 42px rgba(24,38,31,.25)}
-.mobile-top{height:39px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:#fff;font-size:.48rem}.mobile-top b{display:flex;align-items:center}.mobile-top i{width:16px;height:16px;margin-right:4px;font-size:.4rem}.mobile-top>span,.mobile-top>span:before,.mobile-top>span:after{display:block;width:11px;border-top:1px solid #26483f}.mobile-top>span{position:relative}.mobile-top>span:before,.mobile-top>span:after{content:"";position:absolute;top:-4px}.mobile-top>span:after{top:2px}
-.mobile-content{padding:22px 12px 19px;background:#f7f4ed}.mobile-content>small{font-size:.28rem;line-height:1.4}.mobile-content h3{margin:9px 0 8px;color:#193d35;font-size:1.08rem;line-height:1.05}.mobile-content p{margin:0 0 13px;color:#66706a;font-size:.37rem;line-height:1.5}.mobile-content strong{display:inline-block;padding:7px 8px;background:#b66b3f;color:white;font-size:.35rem}.mobile-services{display:flex;flex-direction:column;padding:7px 12px;background:#fff}.mobile-services span{padding:5px 0;border-bottom:1px solid #e5e7e2;color:#26483f;font-size:.34rem;font-weight:750}.mobile-services span:last-child{border:0}
-.project-request{position:absolute;z-index:4;right:13%;bottom:15px;display:flex;flex-direction:column;width:126px;padding:10px 12px;border-left:3px solid #b66b3f;background:#fff;box-shadow:0 10px 25px rgba(24,38,31,.14)}.project-request span{color:#777f7a;font-size:.34rem;text-transform:uppercase;letter-spacing:.08em}.project-request b{margin:3px 0 1px;color:#193d35;font-size:.56rem}.project-request small{color:#68716c;font-size:.4rem}
-@media(max-width:1100px) and (min-width:801px){.site-showcase{width:108%;margin-left:-4%}.trade-nav>div span:nth-child(3){display:none}.trade-copy h2{font-size:1.8rem}.mobile-site{right:-2%;width:118px}.project-request{right:10%}}
-@media(max-width:800px){.site-showcase{width:min(100%,680px);margin:0 auto;padding:34px 28px 50px 0}.site-showcase:before{right:2%}.mobile-site{right:0}.project-request{right:13%}}
-@media(max-width:540px){.site-showcase{padding:24px 0 0}.site-showcase:before{inset:4px -8px 70px 8px}.trade-nav{height:52px;padding:0 14px}.trade-nav>div,.trade-nav>strong{display:none}.trade-hero{grid-template-columns:1fr;min-height:0}.trade-copy{padding:28px 22px}.trade-copy h2{font-size:1.7rem}.trade-proof{display:none}.trade-services{padding:0 8px}.trade-services>span{padding:12px 7px;font-size:.48rem}.trade-services small{font-size:.34rem}.mobile-site{position:relative;right:auto;bottom:auto;width:100%;min-height:0;margin-top:12px;border:0;border-radius:8px;box-shadow:0 12px 28px rgba(24,38,31,.13)}.mobile-top{height:42px}.mobile-content{padding:21px 18px}.mobile-content h3{max-width:270px;font-size:1.28rem}.mobile-content p{font-size:.48rem}.mobile-services{display:grid;grid-template-columns:repeat(3,1fr);padding:6px 12px}.mobile-services span{border:0;font-size:.38rem}.project-request{display:none}}
-
 /* Mobile: ein einzelner Showcase, kompakte Vorteile und eine gemeinsame Prozessachse. */
 .service-accordion{display:none}
 @media(max-width:899px){
   .hero{overflow:visible}
   .hero-copy h1{font-size:clamp(2.25rem,5.7vw,3.2rem);overflow-wrap:anywhere}
   .hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
-  .site-showcase{width:100%;margin:0;padding:10px 0 0}
-  .site-showcase:before{inset:0 2% 5% 2%;border-radius:18px}
-  .desktop-site,.project-request{display:none}
-  .mobile-site{position:relative;right:auto;bottom:auto;width:92%;max-width:420px;min-height:0;margin:0 auto;border:0;border-radius:12px;box-shadow:0 22px 48px rgba(24,38,31,.2)}
-  .mobile-top{height:58px;padding:0 20px;font-size:.72rem}
-  .mobile-top i{width:25px;height:25px;margin-right:7px;font-size:.6rem}
-  .mobile-top>span,.mobile-top>span:before,.mobile-top>span:after{width:18px}
-  .mobile-top>span:before{top:-6px}.mobile-top>span:after{top:4px}
-  .mobile-content{padding:38px 28px 32px}
-  .mobile-content>small{font-size:.48rem}
-  .mobile-content h3{max-width:330px;margin:13px 0 12px;font-size:clamp(1.75rem,8vw,2.35rem)}
-  .mobile-content p{max-width:300px;margin-bottom:22px;font-size:.7rem}
-  .mobile-content strong{padding:11px 13px;font-size:.62rem}
-  .mobile-services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:10px 20px}
-  .mobile-services span{padding:9px 4px;border:0;font-size:.55rem;text-align:center}
-
   #leistungen .service-grid{display:none}
   #leistungen .service-accordion{display:grid;width:100%;gap:10px}
   #leistungen .service-item{width:100%;border:1px solid rgba(217,217,210,.9);border-radius:8px;background:rgba(255,255,255,.68)}
@@ -178,9 +142,6 @@
   .process-claim{max-width:30rem;margin:46px auto 0;padding:36px 8px 4px;font-size:clamp(1.08rem,4.5vw,1.45rem);line-height:1.48}
 }
 @media(max-width:440px){
-  .mobile-site{width:92%}
-  .mobile-content{padding:30px 22px 26px}
-  .mobile-services{padding-inline:12px}
   #leistungen .service-item summary{padding-inline:13px}
   #leistungen .service-summary{gap:11px;font-size:.95rem}
   #leistungen .service-item>p{padding:0 16px 18px 64px}
