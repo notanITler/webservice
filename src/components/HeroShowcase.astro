@@ -29,7 +29,6 @@ const variants = ['desktop', 'mobile'];
       </div>
     </div>
   ))}
-  <div class="project-request" aria-hidden="true"><i>✓</i><div><span>Neue Projektanfrage</span><b>Badsanierung</b><small>Hannover · 3 Fotos</small></div></div>
 </div>
 
 <style>
@@ -86,21 +85,33 @@ const variants = ['desktop', 'mobile'];
   .mobile-site .demo-services small{font-size:2.8cqw}
   .mobile-site .demo-services b{font-size:4.5cqw}
   .mobile-site .demo-services span,.mobile-site .demo-next{display:none}
-  .project-request{position:absolute;left:18px;bottom:32px;display:flex;align-items:center;gap:10px;padding:13px 16px;background:#fff;border:1px solid #e5e8e1;box-shadow:0 12px 28px rgba(24,38,31,.1);border-radius:6px}
-  .project-request i{display:grid;place-items:center;width:26px;height:26px;background:#e5eee9;border-radius:50%;color:#39705a;font-style:normal}
-  .project-request>div{display:flex;flex-direction:column}
-  .project-request span{font-size:8px;color:#6b786e}
-  .project-request b{font-size:11px;color:#193d35}
-  .project-request small{font-size:8px;color:#6b786e}
   @media(min-width:900px) and (max-width:1100px){
     .site-showcase{padding-right:24px;padding-bottom:200px}
-    .project-request{left:0;bottom:40px;padding:10px;gap:7px}
-    .project-request i{display:none}
+  }
+  @media(min-width:900px){
+    .site-showcase{padding:24px 24px 104px 0}
+    .site-showcase::before{inset:0 0 18px 5%}
+    .desktop-site{aspect-ratio:3 / 2;display:flex;flex-direction:column}
+    .desktop-site .site-windowbar{flex:none}
+    .desktop-site .demo-page{display:flex;flex:1;min-height:0;flex-direction:column}
+    .desktop-site .demo-nav{position:relative;z-index:1;flex:none;padding-right:34cqw}
+    .desktop-site .demo-main{flex:1;min-height:0;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:minmax(0,1fr) auto}
+    .desktop-site .demo-copy{align-self:center;padding:4cqw 4cqw 3cqw 5cqw}
+    .desktop-site .demo-copy h3{font-size:5.1cqw;margin:1.8cqw 0}
+    .desktop-site .demo-copy p{font-size:1.75cqw;margin-bottom:2.2cqw}
+    .desktop-site .demo-button{padding:1.6cqw 2cqw;font-size:1.55cqw}
+    .desktop-site .demo-photo{grid-column:2;grid-row:1}
+    .desktop-site .demo-services{grid-column:1 / -1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:2.3cqw 34cqw 2.3cqw 5cqw}
+    .desktop-site .demo-services>div+div{padding-left:3cqw;border-left:1px solid #e0e6dc}
+    .desktop-site .demo-services b{font-size:2.1cqw}
+    .desktop-site .demo-services span{font-size:1.45cqw}
+    .desktop-site .demo-next{width:auto;flex:none;flex-direction:row;gap:3cqw;padding:1.8cqw 34cqw 1.8cqw 5cqw;font-size:1.35cqw}
+    .mobile-site{right:3%;bottom:18px;width:clamp(164px,12vw,184px)}
   }
   @media(max-width:899px){
     .site-showcase{padding:10px 0 0}
     .site-showcase::before{inset:0 2% 5%;border-radius:18px}
-    .desktop-site,.project-request{display:none}
+    .desktop-site{display:none}
     .mobile-site{position:relative;right:auto;bottom:auto;width:92%;max-width:420px;aspect-ratio:5 / 6;margin:0 auto;border:1px solid #d0dad3;border-radius:9px}
     .mobile-site .site-windowbar{display:flex;flex:none;height:7cqw}
     .mobile-site .site-windowbar small{font-size:2.4cqw}
