@@ -59,12 +59,15 @@ assert(index.includes('david@gehrke-webservice.de'), 'The configured contact ema
 assert(!allSource.includes('[Nachname]'), 'The surname placeholder must be replaced.');
 assert(!allSource.includes('[domain]'), 'The domain placeholder must be replaced.');
 assert(
-  sources.get('src/pages/impressum.astro').includes('Platzhalter – vor Veröffentlichung ersetzen'),
-  'The legal notice must identify its placeholder content.',
+  sources.get('src/pages/impressum.astro').includes('David Gehrke')
+    && !sources.get('src/pages/impressum.astro').includes('Platzhalter'),
+  'The legal notice must contain the current contact information.',
 );
 assert(
-  sources.get('src/pages/datenschutz.astro').includes('Platzhalter – vor Veröffentlichung rechtlich prüfen und ersetzen'),
-  'The privacy notice must identify its placeholder content.',
+  sources.get('src/pages/datenschutz.astro').includes('Cloudflare Pages')
+    && sources.get('src/pages/datenschutz.astro').includes('STRATO')
+    && !sources.get('src/pages/datenschutz.astro').includes('Platzhalter'),
+  'The privacy notice must contain the current hosting and contact information.',
 );
 assert(read('astro.config.mjs').includes("site: 'https://www.gehrke-webservice.de'"), 'The Astro site URL is missing or unexpected.');
 assert(read('astro.config.mjs').includes("output: 'static'"), 'Astro output must remain static.');
