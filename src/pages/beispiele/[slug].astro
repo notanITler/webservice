@@ -17,7 +17,7 @@ const { project } = Astro.props;
   <main id="main" class="case-detail">
     <section class="case-hero">
       <div class="container">
-        <a class="text-link case-back" href="/#beispiele">← Alle Beispiele</a>
+        <a class="text-link case-back" href="/beispiele/">← Alle Beispiele</a>
         <div class="case-meta"><p class="eyebrow">{project.industry}</p>{project.isDemo && <span class="case-badge">Demoprojekt</span>}</div>
         {project.logo && <img class="case-logo" src={project.logo.src} alt={project.logo.alt} width={project.logo.width} height={project.logo.height} />}
         <h1>{project.name}</h1>

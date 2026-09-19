@@ -18,6 +18,7 @@ const checkedFiles = [
   'src/components/CasesSection.astro',
   'src/data/cases.ts',
   'src/pages/beispiele/[slug].astro',
+  'src/pages/beispiele/index.astro',
   'src/pages/sitemap.xml.ts',
 ];
 

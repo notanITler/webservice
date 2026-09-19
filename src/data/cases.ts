@@ -22,6 +22,7 @@ export interface CaseStudy {
   isDemo: boolean;
   logo?: CaseImage;
   testimonial?: { quote: string; name?: string; role?: string };
+  featured?: boolean;
   order?: number;
 }
 
@@ -66,7 +67,38 @@ const entries: CaseStudy[] = [
       caption: 'Kompakte Ansicht: klare Gliederung auch auf kleineren Bildschirmen.',
     },
     isDemo: true,
+    featured: true,
     order: 10,
+  },
+  {
+    name: 'Elektro Brandt',
+    slug: 'elektro-brandt',
+    industry: 'Elektrohandwerk',
+    summary: 'Website-Konzept für einen Elektrobetrieb mit direkter Orientierung zu Leistungen, Notdienst und Anfrage.',
+    description: 'Dieses Demoprojekt zeigt einen klar gegliederten Auftritt für einen regionalen Elektrobetrieb. Die Gestaltung setzt auf eine helle, technische Bildsprache und führt schnell zu den passenden Kontaktwegen.',
+    situation: 'Elektroleistungen sind oft erklärungsbedürftig. Wer schnell Hilfe oder einen festen Ansprechpartner sucht, braucht eine Website mit klaren Themen und gut sichtbaren Kontaktmöglichkeiten.',
+    goal: 'Ein übersichtlicher Auftritt, der Leistungen verständlich bündelt, wichtige Kontaktwege hervorhebt und auf allen Geräten verlässlich funktioniert.',
+    features: ['Leistungen für Privat- und Gewerbekunden', 'Direkte Kontaktwege für Anfragen und Notdienst', 'Kompakte Leistungsübersicht mit klarer Navigation', 'Mobil optimierte Seitenstruktur'],
+    preview: { src: '/images/cases/elektro-brandt/desktop.svg', alt: 'Desktop-Entwurf für Elektro Brandt mit blauem Hero-Bereich und Leistungsübersicht', width: 1200, height: 800 },
+    screenshots: [],
+    isDemo: true,
+    featured: true,
+    order: 20,
+  },
+  {
+    name: 'Praxis am Park',
+    slug: 'praxis-am-park',
+    industry: 'Physiotherapie',
+    summary: 'Website-Konzept für eine Physiotherapiepraxis mit ruhiger Bildsprache, Leistungsüberblick und Terminweg.',
+    description: 'Dieses Demoprojekt zeigt, wie eine Praxis ihre Behandlungsschwerpunkte und den Weg zur Terminvereinbarung verständlich darstellen kann. Die Gestaltung bleibt freundlich, reduziert und gut lesbar.',
+    situation: 'Neue Patientinnen und Patienten möchten schnell wissen, ob eine Praxis zu ihrem Anliegen passt und wie sie einen Termin vereinbaren können.',
+    goal: 'Eine vertrauensvolle, leicht zugängliche Website, die Leistungen, Praxisalltag und Kontakt klar zusammenführt.',
+    features: ['Behandlungsschwerpunkte klar strukturiert', 'Ruhige, zugängliche Gestaltung', 'Sichtbare Termin- und Kontaktwege', 'Gut lesbare Inhalte auf kleinen Bildschirmen'],
+    preview: { src: '/images/cases/praxis-am-park/desktop.svg', alt: 'Desktop-Entwurf für Praxis am Park mit heller Bildfläche und Terminbereich', width: 1200, height: 800 },
+    screenshots: [],
+    isDemo: true,
+    featured: true,
+    order: 30,
   },
 ];
 
@@ -83,3 +115,5 @@ export const cases = [...entries].sort((a, b) =>
   (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER)
   || a.name.localeCompare(b.name, 'de'),
 );
+
+export const featuredCases = cases.filter((project) => project.featured);

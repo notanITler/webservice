@@ -8,7 +8,7 @@ const sectionHref = (section: string) => `${isHomePage ? '' : '/'}#${section}`;
     <nav aria-label="Hauptnavigation">
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="main-menu"><span></span><span></span><span></span><span class="sr-only">Menü öffnen</span></button>
       <div class="nav-links" id="main-menu">
-        <a href={sectionHref('leistungen')}>Leistungen</a><a href={sectionHref('ablauf')}>Ablauf</a><a href={sectionHref('preise')}>Preise</a><a href={sectionHref('ueber-mich')}>Über mich</a><a href={sectionHref('anfrage')}>Anfrage</a>
+        <a href={sectionHref('leistungen')}>Leistungen</a><a href="/beispiele/">Beispiele</a><a href={sectionHref('ablauf')}>Ablauf</a><a href={sectionHref('preise')}>Preise</a><a href={sectionHref('ueber-mich')}>Über mich</a><a href={sectionHref('anfrage')}>Anfrage</a>
       </div>
     </nav>
     <a class="button button-small header-cta" href={sectionHref('anfrage')}>Website anfragen</a>
