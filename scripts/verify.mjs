@@ -13,6 +13,11 @@ const checkedFiles = [
   'src/components/Faq.astro',
   'src/components/Icon.astro',
   'src/components/PriceCard.astro',
+  'src/components/CaseCard.astro',
+  'src/components/CasesSection.astro',
+  'src/data/cases.ts',
+  'src/pages/beispiele/[slug].astro',
+  'src/pages/sitemap.xml.ts',
 ];
 
 const sources = new Map(checkedFiles.map((path) => [path, read(path)]));
@@ -26,7 +31,7 @@ for (const [path, source] of sources) {
   for (const match of source.matchAll(/from\s+['"](\.[^'"]+)['"]/g)) {
     const candidate = resolve(root, dirname(path), match[1]);
     assert(
-      existsSync(candidate) || (!extname(candidate) && existsSync(`${candidate}.astro`)),
+      existsSync(candidate) || (!extname(candidate) && ['.astro', '.ts'].some((extension) => existsSync(`${candidate}${extension}`))),
       `${path}: import not found: ${match[1]}`,
     );
   }

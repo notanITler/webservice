@@ -110,3 +110,20 @@ Vor dem ersten Preview-Deployment sollten `npm install`, `npm run lint`, `npm ru
 - Die Website nutzt einen hochwertigen System-Font-Stack und lädt dadurch keine externen Schriftdateien. Das Schriftbild kann sich je nach Betriebssystem geringfügig unterscheiden.
 - Rechtstexte sind nur klar gekennzeichnete Platzhalter und keine Rechtsberatung.
 - Open Graph enthält noch kein Vorschaubild, da noch kein finales Markenmotiv vorliegt.
+
+## Referenzen und Beispielprojekte
+
+Cases werden zentral in `src/data/cases.ts` gepflegt. Ein weiterer Eintrag in `entries` erzeugt beim Build automatisch eine Karte auf der Startseite, die Detailseite `/beispiele/<slug>` und den Sitemap-Eintrag. Komponenten oder Layouts müssen dafür nicht geändert werden. Slugs müssen eindeutig sein und aus Kleinbuchstaben, Ziffern und Bindestrichen bestehen. `order` sortiert aufsteigend; Einträge ohne Reihenfolge folgen alphabetisch.
+
+Pflichtfelder: `name`, `slug`, `industry`, `summary` (auch Meta Description), `description`, `situation`, `goal`, `features`, `preview`, `screenshots` und `isDemo`. Bilder enthalten `src`, `alt`, `width`, `height` und optional `caption`. Die Screenshot-Liste darf leer sein; dann entfällt die Galerie.
+
+Optionale Felder: `websiteUrl` (HTTPS), `logo` (Bildobjekt), `testimonial` mit `quote` und optional `name`/`role`, sowie `order`. Bei `isDemo: true` erscheinen Demo-Kennzeichnungen und der ausdrückliche Hinweis. Für einen echten Kunden `isDemo: false` setzen und ausschließlich freigegebene Inhalte verwenden; ohne Logo oder Zitat entstehen keine leeren Bereiche. Externe Links werden nur bei vorhandener URL angezeigt und passend als Live-Demo oder Website bezeichnet.
+
+Optimierte Bilder/Screenshots unter `public/images/cases/<slug>/` ablegen und als `/images/cases/<slug>/datei.webp` referenzieren. Tatsächliche Pixelmaße und beschreibende Alt-Texte angeben. Die Darstellung zeigt Bilder vollständig; Galerieansichten lassen sich in Originalgröße öffnen. Bilder unterhalb des Einstiegs werden verzögert geladen. Es werden keine neuen Dependencies oder Case-spezifischen Browser-Skripte benötigt.
+
+Hansen Haustechnik ist ein fiktiver Entwurf, kein Kundenauftrag und keine vollständige Live-Website. Die drei WebP-Ansichten wurden aus der bereits vorhandenen `HeroShowcase.astro`-Vorschau im Arbeitsstand `hero-desktop-composition` gerendert. Die fiktive Jahresangabe wurde für die Screenshots durch eine neutrale regionale Einordnung ersetzt. Der Referenzbereich ist als Teil der Seitenstruktur vorgesehen; es werden keine abgeschlossenen Kundenprojekte behauptet. Eine Live-URL ist bewusst nicht hinterlegt.
+
+Bildquelle des im Entwurf enthaltenen Badmotivs: Franco Debartolo, [Original auf Unsplash](https://unsplash.com/photos/modern-bathroom-with-a-white-freestanding-bathtub-and-large-window-Ns3T2jCfQFk), [Unsplash-Lizenz](https://unsplash.com/license). Grundlage ist das bereits lokal vorhandene `hansen-bathroom.webp`; es erfolgen keine externen Bildanfragen.
+
+Die Sitemap liegt jetzt als statischer Astro-Endpunkt in `src/pages/sitemap.xml.ts` vor und ersetzt die bisherige manuell gepflegte `public/sitemap.xml`.
+`featureImage` ist ein optionales Bildobjekt für die Darstellung neben den Schwerpunkten. Die übrigen `screenshots` erscheinen danach als Galerie. Ohne `featureImage` wird die Liste ohne leere Bildspalte dargestellt. Ein vorhandener `websiteUrl`-Link steht direkt unter dem Hero-Bild und öffnet einen neuen Tab.

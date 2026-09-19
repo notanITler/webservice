@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Icon from '../components/Icon.astro';
 import PriceCard from '../components/PriceCard.astro';
 import Faq from '../components/Faq.astro';
+import CasesSection from '../components/CasesSection.astro';
 
 const services = [
   { icon: 'layout', title: 'Professioneller Auftritt', text: 'Ein individuelles Design, das zu Ihrem Unternehmen passt und Vertrauen schafft.', featured: true },
@@ -57,6 +58,8 @@ const pro = ['Alles aus dem Website-Paket', 'Strukturierte Projektanfragen', 'In
     <div class="trust"><div class="container trust-grid"><p><span>✓</span> Persönlicher Ansprechpartner</p><p><span>✓</span> 0 € Erstellung</p><p><span>✓</span> Hosting &amp; Betreuung inklusive</p></div></div>
 
     <section id="leistungen"><div class="container"><div class="section-heading"><div><p class="eyebrow">Alles aus einer Hand</p><h2>Eine Website, die für<br />Sie arbeitet.</h2></div><p>Von Gestaltung und Texten bis Hosting, Technik und Änderungen – ich kümmere mich um den laufenden Webauftritt.</p></div><div class="service-grid">{services.map(({ icon, title, text, featured }) => <article class:list={['service', { 'service-featured': featured }]}><div class="service-title"><div class="icon"><Icon name={icon} /></div><h3>{title}</h3></div><p>{text}</p></article>)}</div><div class="service-accordion">{services.map(({ icon, title, text }) => <details class="service-item"><summary><span class="service-summary"><span class="icon"><Icon name={icon} /></span><span>{title}</span></span><span class="service-toggle" aria-hidden="true"></span></summary><p>{text}</p></details>)}</div></div></section>
+
+    <CasesSection />
 
     <section class="process" id="ablauf">
       <div class="container">

@@ -1,0 +1,72 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import { cases } from '../../data/cases';
+import '../../styles/cases.css';
+
+export const getStaticPaths = (() => cases.map((project) => ({
+  params: { slug: project.slug }, props: { project },
+}))) satisfies GetStaticPaths;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { project } = Astro.props;
+---
+<BaseLayout title={`${project.name} – ${project.isDemo ? 'Demoprojekt' : 'Kundenprojekt'} | Gehrke Webservice`} description={project.summary} canonicalPath={`/beispiele/${project.slug}`}>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <Header />
+  <main id="main" class="case-detail">
+    <section class="case-hero">
+      <div class="container">
+        <a class="text-link case-back" href="/#beispiele">← Alle Beispiele</a>
+        <div class="case-meta"><p class="eyebrow">{project.industry}</p>{project.isDemo && <span class="case-badge">Demoprojekt</span>}</div>
+        {project.logo && <img class="case-logo" src={project.logo.src} alt={project.logo.alt} width={project.logo.width} height={project.logo.height} />}
+        <h1>{project.name}</h1>
+        <p class="lead">{project.summary}</p>
+        <p class="case-description">{project.description}</p>
+        <figure class="case-cover"><img src={project.preview.src} alt={project.preview.alt} width={project.preview.width} height={project.preview.height} fetchpriority="high" decoding="async" /></figure>
+        {project.websiteUrl && <div class="case-cover-footer">
+          <a class="button button-small" href={project.websiteUrl} target="_blank" rel="noopener noreferrer">{project.isDemo ? 'Live-Demo ansehen' : 'Website ansehen'} <span aria-hidden="true">↗</span><span class="sr-only"> (öffnet in neuem Tab)</span></a>
+        </div>}
+      </div>
+    </section>
+    <section class="case-context" aria-label="Ausgangslage und Ziel">
+      <div class="container case-context-grid">
+        <div><p class="eyebrow">01 / Ausgangslage</p><h2>Die Ausgangslage</h2><p>{project.situation}</p></div>
+        <div><p class="eyebrow">02 / Ziel</p><h2>Das Ziel</h2><p>{project.goal}</p></div>
+      </div>
+    </section>
+    <section class="case-focus" aria-labelledby="features-heading">
+      <div class="container">
+        <p class="eyebrow">03 / Umsetzung</p><h2 id="features-heading">Die Schwerpunkte</h2>
+        <div class:list={['case-focus-grid', { 'case-focus-with-image': !!project.featureImage }]}>
+          {project.featureImage && <figure class="case-feature-image">
+            <a href={project.featureImage.src} aria-label={`${project.featureImage.alt} – in voller Größe öffnen`}><img src={project.featureImage.src} alt={project.featureImage.alt} width={project.featureImage.width} height={project.featureImage.height} loading="lazy" decoding="async" /></a>
+            {project.featureImage.caption && <figcaption>{project.featureImage.caption}</figcaption>}
+          </figure>}
+          <ul class="case-features">{project.features.map((feature) => <li><span aria-hidden="true">✓</span>{feature}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+    {project.screenshots.length > 0 && <section class="case-gallery-section" aria-labelledby="gallery-heading">
+      <div class="container">
+        <p class="eyebrow">Ein Blick ins Projekt</p><h2 id="gallery-heading">Weitere Ansichten</h2>
+        <div class:list={['case-gallery', { 'case-gallery-single': project.screenshots.length === 1 }]}>{project.screenshots.map((screenshot) => <figure>
+          <a href={screenshot.src} aria-label={`${screenshot.alt} – in voller Größe öffnen`}><img src={screenshot.src} alt={screenshot.alt} width={screenshot.width} height={screenshot.height} loading="lazy" decoding="async" /></a>
+          {screenshot.caption && <figcaption>{screenshot.caption}</figcaption>}
+        </figure>)}</div>
+      </div>
+    </section>}
+    {project.testimonial && <section class="case-testimonial" aria-labelledby="quote-heading"><div class="container">
+      <p class="eyebrow">Aus der Zusammenarbeit</p><h2 id="quote-heading">Das sagt der Kunde</h2>
+      <figure><blockquote><p>„{project.testimonial.quote}“</p></blockquote>
+        {(project.testimonial.name || project.testimonial.role) && <figcaption>{[project.testimonial.name, project.testimonial.role].filter(Boolean).join(' · ')}</figcaption>}
+      </figure>
+    </div></section>}
+    <section class="final-cta"><div class="container">
+      <p class="eyebrow light">Ihre Website</p><h2>So könnte auch Ihre Website aussehen.</h2>
+      <p>Erzählen Sie mir kurz von Ihrem Unternehmen. Wir schauen gemeinsam, welche Website zu Ihrem Angebot passt.</p>
+      <a class="button button-light" href="mailto:david@gehrke-webservice.de">Unverbindlich anfragen <span aria-hidden="true">→</span></a>
+    </div></section>
+  </main>
+  <footer><div class="container case-footer"><a class="brand" href="/"><span>Gehrke</span> Webservice</a><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></div></footer>
+</BaseLayout>

@@ -1,0 +1,14 @@
+---
+import { cases } from '../data/cases';
+import CaseCard from './CaseCard.astro';
+import '../styles/cases.css';
+---
+{cases.length > 0 && <section class="cases-section" id="beispiele" aria-labelledby="cases-heading">
+  <div class="container">
+    <div class="section-heading">
+      <div><p class="eyebrow">Einblicke in die Gestaltung</p><h2 id="cases-heading">So kann Ihre neue Website aussehen.</h2></div>
+      <p>Beispiele dafür, wie ich Websites für kleine Unternehmen strukturiere – klar, professionell und auf konkrete Kundenanfragen ausgerichtet.</p>
+    </div>
+    <div class:list={['case-grid', { 'case-grid-single': cases.length === 1 }]}>{cases.map((project) => <CaseCard project={project} />)}</div>
+  </div>
+</section>}

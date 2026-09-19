@@ -182,3 +182,6 @@
   #leistungen .service-item>p{padding:0 16px 18px 64px}
   .steps article,.steps article+article{gap:14px;padding-bottom:27px}
 }
+
+/* Luft und weiche Ecken für die Anfrage-Buttons in der Hero-Vorschau. */
+.site-showcase .trade-button,.site-showcase .mobile-content strong{border-radius:5px;margin-bottom:8px}
