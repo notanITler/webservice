@@ -15,13 +15,11 @@ async function checkLayout(page, width, enlarged = false) {
     }));
   expect(outside).toEqual([]);
   if (width >= 900) return;
-  await expect(page.locator('.desktop-site')).toBeHidden();
-  await expect(page.locator('.project-request')).toBeHidden();
-  await expect(page.locator('.mobile-site')).toBeVisible();
-  const preview = await page.locator('.mobile-site').boundingBox();
-  const showcase = await page.locator('.site-showcase').boundingBox();
-  expect(Math.abs(preview.x + preview.width / 2 - width / 2)).toBeLessThan(1);
-  expect(showcase.height - preview.height).toBeLessThanOrEqual(11);
+  await expect(page.locator('.site-showcase .preview-1')).toBeVisible();
+  await expect(page.locator('.showcase-label')).toContainText('Website-Beispiele');
+  const preview = await page.locator('.site-showcase').boundingBox();
+  const copy = await page.locator('.hero-copy').boundingBox();
+  expect(preview.y).toBeGreaterThanOrEqual(copy.y + copy.height);
   const axis = await page.locator('.steps').evaluate(el => {
     const css = getComputedStyle(el, '::before');
     const rows = [...el.children].map(row => {

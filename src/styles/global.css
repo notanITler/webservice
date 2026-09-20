@@ -147,3 +147,44 @@
   #leistungen .service-item>p{padding:0 16px 18px 64px}
   .steps article,.steps article+article{gap:14px;padding-bottom:27px}
 }
+
+/* Startseiten-Hero: persönlicher Service, direkte Aktionen und kuratierte Arbeiten. */
+.hero{padding:72px 0 76px;overflow:visible}
+.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+.hero-copy{min-width:0}
+.hero-copy .eyebrow{font-size:.66rem;letter-spacing:.13em;margin-bottom:24px}
+.hero-copy h1{font-size:clamp(2.55rem,4.4vw,4.55rem);line-height:1.08;letter-spacing:-.05em;margin-bottom:24px}
+.hero-copy h1 span{font-weight:650}
+.hero-copy .lead{max-width:510px;font-size:1.08rem;line-height:1.65;margin-bottom:28px}
+.hero-copy .button-row{gap:26px;flex-wrap:wrap}
+.hero-copy .button,.site-header .header-cta{border-radius:7px;gap:20px}
+.hero-copy .button{padding:14px 20px}
+.hero-copy .button:hover{transform:none;box-shadow:0 5px 14px rgba(33,76,59,.1)}
+.hero-copy .button span{display:inline-block;transition:transform .2s ease}
+.hero-copy .button:hover span{transform:translateX(3px)}
+@media(prefers-reduced-motion:reduce){.hero-copy .button:hover span{transform:none}}
+.hero-copy .text-link{display:inline-flex;align-items:center;min-height:44px;font-size:.92rem;border-bottom-color:var(--line);transition:color .2s,border-color .2s}
+.hero-copy .text-link:hover{color:var(--green);border-bottom-color:var(--green)}
+.hero-personal{max-width:420px;margin:22px 0 0;font-size:.8rem;line-height:1.6;color:var(--muted)}
+.site-header .brand{display:flex;flex-direction:column;gap:4px;font-size:.61rem;letter-spacing:.16em;line-height:1.1}
+.site-header .brand span{font-size:1.35rem;letter-spacing:-.035em;font-weight:750}
+@media(min-width:900px) and (max-width:1100px){
+  .hero-grid{gap:30px}
+  .hero-copy h1{font-size:clamp(2.5rem,4.3vw,3rem)}
+  .hero-break{display:none}
+}
+@media(max-width:899px){
+  .hero{padding:42px 0 52px}
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:38px}
+  .hero-copy{max-width:620px;width:100%;margin-inline:auto}
+  .hero-copy h1{font-size:clamp(2rem,6.6vw,3.6rem);overflow-wrap:normal}
+  .hero-copy .eyebrow{font-size:.6rem;margin-bottom:20px}
+  .hero-copy .eyebrow>span{width:18px;margin-right:6px}
+  .hero-copy .lead{font-size:1rem;margin-bottom:22px}
+}
+@media(max-width:440px){
+  .hero-copy .button-row{align-items:flex-start;flex-direction:column;gap:8px}
+  .hero-copy .button{min-height:48px;font-size:.92rem}
+  .hero-copy .text-link{font-size:.88rem}
+  .hero-copy .eyebrow{letter-spacing:.07em}
+}

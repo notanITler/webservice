@@ -1,141 +1,67 @@
 ---
-const variants = ['desktop', 'mobile'];
+interface PortfolioPreview {
+  name: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  browserBarHeight?: number;
+}
+// Add a final Praxis screenshot here when available; SVG concept art is not a screenshot.
+const additionalPreview: PortfolioPreview | undefined = undefined;
+const projects: PortfolioPreview[] = [
+  { name: 'Hansen Haustechnik', src: '/images/cases/hansen-haustechnik/desktop.webp', alt: 'Hansen Haustechnik: warmer Website-Entwurf mit Badmotiv und Leistungen.', width: 1200, height: 800, browserBarHeight: 72 },
+  { name: 'Elektro Brandt', src: '/images/hero-brandt/elektro-brandt-desktop.webp', alt: 'Elektro Brandt: dunkler Website-Entwurf mit Elektroinstallation und orangefarbenen Akzenten.', width: 960, height: 675 },
+  ...(additionalPreview ? [additionalPreview] : []),
+];
 ---
-
-<div class="site-showcase" role="img" aria-label="Responsive Beispielwebsite für den fiktiven Betrieb Hansen Haustechnik: modernes Baddesign und Leistungen rund um Bad und Haustechnik.">
-  {variants.map((variant) => (
-    <div class:list={['preview-frame', `${variant}-site`]} aria-hidden="true">
-      <div class="site-windowbar"><span class="window-dots">● ● ●</span><small>hansen-haustechnik.example</small><span class="demo-label">DEMO</span></div>
-      <div class="demo-page">
-        <div class="demo-nav">
-          <b><i>H</i><span>Hansen <small>Haustechnik</small></span></b>
-          <div><span>Leistungen</span><span>Referenzen</span></div>
-          <span class="demo-menu">☰</span>
-        </div>
-        <div class="demo-main">
-          <div class="demo-copy">
-            <small>Ihr Zuhause. Unser Handwerk.</small>
-            <h3>Bäder mit Raum fürs Leben.</h3>
-            <p>Durchdacht geplant. Mit Sorgfalt umgesetzt. Ihr neues Bad aus einer Hand.</p>
-            <span class="demo-button">Badprojekt besprechen <b>↗</b></span>
-          </div>
-          <div class="demo-photo"><img src="/hansen-bathroom.webp" alt="" width="1200" height="1800" decoding="async" /><span>Räume zum Wohlfühlen.</span></div>
-          <div class="demo-services">
-            <div><small>01 / BADSANIERUNG</small><b>Vom Wunsch zum Bad.</b><span>Planung bis zum letzten Detail.</span></div>
-            <div><small>02 / HAUSTECHNIK</small><b>Komfort, der bleibt.</b><span>Moderne Wärme für Ihr Zuhause.</span></div>
-          </div>
-        </div>
-        <div class="demo-next"><span>Gutes Handwerk. Persönlich begleitet.</span><b>Seit 1998 in Hannover ↗</b></div>
+<figure class="site-showcase">
+  <div class:list={['portfolio-stack', { 'has-third': projects.length > 2 }]}>
+    {projects.map((project, index) => (
+      <div class:list={['preview-frame', `preview-${index + 1}`]}>
+        {project.browserBarHeight ? (
+          <>
+            <div class="preview-chrome" style={`aspect-ratio:${project.width}/${project.browserBarHeight}`} aria-hidden="true"><span>● ● ●</span></div>
+            {/* Crop only the baked-in browser metadata; keep the shared source asset intact. */}
+            <div class="preview-crop" style={`aspect-ratio:${project.width}/${project.height - project.browserBarHeight}`}>
+              <img src={project.src} alt={project.alt} width={project.width} height={project.height} style={`margin-top:-${project.browserBarHeight / project.width * 100}%`} decoding="async" fetchpriority={index === 0 ? 'high' : 'auto'} />
+            </div>
+          </>
+        ) : (
+          <img src={project.src} alt={project.alt} width={project.width} height={project.height} decoding="async" fetchpriority={index === 0 ? 'high' : 'auto'} />
+        )}
       </div>
-    </div>
-  ))}
-</div>
+    ))}
+  </div>
+  <figcaption>
+    <span class="showcase-label">Website-Beispiele</span>
+    <strong>Individuell gestaltet.</strong>
+    <span>Passend zum jeweiligen Betrieb.</span>
+  </figcaption>
+</figure>
 
 <style>
-  .site-showcase{position:relative;isolation:isolate;width:100%;min-width:0;padding:24px 36px 170px 0}
-  .site-showcase::before{content:"";position:absolute;z-index:-1;inset:0 0 24px 5%;border-radius:18px;background:#e2ece6}
-  .preview-frame{container-type:inline-size;background:#fff;border:1px solid #d0dad3;box-shadow:0 22px 48px rgba(24,38,31,.16);overflow:hidden}
-  .desktop-site{position:relative;border-radius:9px}
-  .site-windowbar{display:flex;align-items:center;justify-content:space-between;gap:2cqw;height:6cqw;padding:0 3cqw;background:#edf0eb;border-bottom:1px solid #dce3dd;color:#66746d}
-  .window-dots{font-size:1.2cqw;letter-spacing:.2cqw;color:#acb8ae;white-space:nowrap}
-  .site-windowbar small{font-size:1.8cqw;letter-spacing:.02em}
-  .demo-label{font-size:1.4cqw;letter-spacing:.08em;font-weight:750}
-  .demo-page{color:#193d35;background:#f7f4ed}
-  .demo-nav{display:flex;align-items:center;justify-content:space-between;height:12cqw;padding:0 5cqw;border-bottom:1px solid #e5e9e2;background:#fff}
-  .demo-nav>b{display:flex;align-items:center;gap:1.5cqw;font-size:3cqw;letter-spacing:-.02em;line-height:1.1}
-  .demo-nav i{display:grid;place-items:center;flex:none;width:6cqw;height:6cqw;border-radius:50%;background:#174b42;color:#fff;font-size:3cqw;font-style:normal}
-  .demo-nav b small{display:block;margin-top:.6cqw;font-size:1.8cqw;font-weight:500;letter-spacing:.06em}
-  .demo-nav>div{display:flex;gap:3cqw;font-size:1.8cqw;font-weight:600}
-  .demo-menu{display:none}
-  .demo-main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
-  .demo-copy{min-width:0;padding:6cqw 4cqw 5cqw 5cqw}
-  .demo-copy>small{display:block;color:#607268;font-size:1.6cqw;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
-  .demo-copy h3{margin:2.5cqw 0;color:#193d35;font-size:6cqw;line-height:1.05;letter-spacing:-.045em}
-  .demo-copy p{margin:0 0 3cqw;color:#637168;font-size:2cqw;line-height:1.5}
-  .demo-button{display:inline-flex;align-items:center;gap:2cqw;padding:2cqw 2.5cqw;background:#b66b3f;color:#fff;font-size:1.8cqw;font-weight:650;white-space:nowrap}
-  .demo-photo{position:relative;grid-column:2;grid-row:1 / 3;min-width:0;min-height:0;background:#d5dcd5}
-  .demo-photo img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:48% 57%}
-  .demo-photo>span{position:absolute;top:4cqw;left:3cqw;right:3cqw;color:#fff;text-shadow:0 1px 8px #193d35;font-size:1.8cqw;font-weight:600}
-  .demo-services{grid-column:1;display:grid;gap:3cqw;padding:3cqw 5cqw 4cqw;background:#fff}
-  .demo-services>div{display:flex;flex-direction:column;gap:.5cqw}
-  .demo-services small{color:#a65f35;font-size:1.4cqw;letter-spacing:.08em;font-weight:700}
-  .demo-services b{font-size:2.5cqw;line-height:1.2}
-  .demo-services span{font-size:1.7cqw;color:#68766c}
-  .demo-next{display:flex;justify-content:space-between;gap:3cqw;padding:3cqw 5cqw;background:#e9eee5;font-size:1.6cqw}
-  .demo-next b{font-weight:600}
-  .desktop-site .demo-next{width:53.5%;flex-direction:column;gap:1cqw}
-  .mobile-site{position:absolute;z-index:2;right:0;bottom:0;width:clamp(176px,14vw,196px);aspect-ratio:10 / 21;border:6px solid #25382f;border-radius:26px;display:flex;flex-direction:column}
-  .mobile-site .site-windowbar{display:none}
-  .mobile-site .demo-page{display:flex;flex:1;min-height:0;flex-direction:column}
-  .mobile-site .demo-nav{height:18cqw;flex:none;padding-inline:7cqw}
-  .mobile-site .demo-nav>b{gap:3cqw;font-size:5.5cqw}
-  .mobile-site .demo-nav i{width:10cqw;height:10cqw;font-size:5cqw}
-  .mobile-site .demo-nav b small{font-size:3.7cqw}
-  .mobile-site .demo-nav>div{display:none}
-  .mobile-site .demo-menu{display:block;font-size:6cqw}
-  .mobile-site .demo-main{display:flex;flex:1;min-height:0;flex-direction:column}
-  .mobile-site .demo-copy{padding:7cqw}
-  .mobile-site .demo-copy>small{font-size:3.3cqw;letter-spacing:.04em}
-  .mobile-site .demo-copy h3{font-size:10cqw;margin:4cqw 0}
-  .mobile-site .demo-copy p{font-size:4.2cqw;margin-bottom:4cqw}
-  .mobile-site .demo-button{padding:3cqw 4cqw;font-size:3.6cqw}
-  .mobile-site .demo-photo{flex:1;min-height:36cqw}
-  .mobile-site .demo-photo>span{display:none}
-  .mobile-site .demo-services{gap:3cqw;padding:5cqw 7cqw}
-  .mobile-site .demo-services small{font-size:2.8cqw}
-  .mobile-site .demo-services b{font-size:4.5cqw}
-  .mobile-site .demo-services span,.mobile-site .demo-next{display:none}
-  @media(min-width:900px) and (max-width:1100px){
-    .site-showcase{padding-right:24px;padding-bottom:200px}
-  }
-  @media(min-width:900px){
-    .site-showcase{padding:24px 24px 104px 0}
-    .site-showcase::before{inset:0 0 18px 5%}
-    .desktop-site{aspect-ratio:3 / 2;display:flex;flex-direction:column}
-    .desktop-site .site-windowbar{flex:none}
-    .desktop-site .demo-page{display:flex;flex:1;min-height:0;flex-direction:column}
-    .desktop-site .demo-nav{position:relative;z-index:1;flex:none;padding-right:34cqw}
-    .desktop-site .demo-main{flex:1;min-height:0;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:minmax(0,1fr) auto}
-    .desktop-site .demo-copy{align-self:center;padding:4cqw 4cqw 3cqw 5cqw}
-    .desktop-site .demo-copy h3{font-size:5.1cqw;margin:1.8cqw 0}
-    .desktop-site .demo-copy p{font-size:1.75cqw;margin-bottom:2.2cqw}
-    .desktop-site .demo-button{padding:1.6cqw 2cqw;font-size:1.55cqw}
-    .desktop-site .demo-photo{grid-column:2;grid-row:1}
-    .desktop-site .demo-services{grid-column:1 / -1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:2.3cqw 34cqw 2.3cqw 5cqw}
-    .desktop-site .demo-services>div+div{padding-left:3cqw;border-left:1px solid #e0e6dc}
-    .desktop-site .demo-services b{font-size:2.1cqw}
-    .desktop-site .demo-services span{font-size:1.45cqw}
-    .desktop-site .demo-next{width:auto;flex:none;flex-direction:row;gap:3cqw;padding:1.8cqw 34cqw 1.8cqw 5cqw;font-size:1.35cqw}
-    .mobile-site{right:3%;bottom:18px;width:clamp(164px,12vw,184px)}
-  }
+  .site-showcase{width:100%;min-width:0;margin:0}
+  .portfolio-stack{position:relative;isolation:isolate;aspect-ratio:1.12}
+  .preview-frame{position:absolute;overflow:hidden;background:white;border:1px solid #cdd8d2;border-radius:7px;box-shadow:0 12px 28px rgba(24,38,31,.1)}
+  .preview-frame img{display:block;width:100%;height:auto}
+  .preview-crop{overflow:hidden;display:flow-root}
+  .preview-chrome{display:flex;align-items:center;padding-inline:3%;background:#eef1ed;color:#aab6ae;container-type:inline-size}
+  .preview-chrome span{font-size:1.1cqw;letter-spacing:.5cqw;line-height:1}
+  .preview-1{z-index:3;left:0;bottom:0;width:94%}
+  .preview-2{z-index:2;right:0;top:0;width:78%}
+  .preview-3{z-index:1;left:0;top:0;width:62%}
+  .has-third{aspect-ratio:1}
+  .has-third .preview-2{top:12%}
+  figcaption{margin-top:25px;padding-left:18px;border-left:2px solid var(--green);font-size:.88rem;line-height:1.55;color:var(--muted)}
+  figcaption strong{display:block;color:var(--ink);font-weight:600}
+  .showcase-label{display:block;margin-bottom:7px;font-size:.61rem;letter-spacing:.13em;text-transform:uppercase;color:var(--green);font-weight:650}
   @media(max-width:899px){
-    .site-showcase{padding:10px 0 0}
-    .site-showcase::before{inset:0 2% 5%;border-radius:18px}
-    .desktop-site{display:none}
-    .mobile-site{position:relative;right:auto;bottom:auto;width:92%;max-width:420px;aspect-ratio:5 / 6;margin:0 auto;border:1px solid #d0dad3;border-radius:9px}
-    .mobile-site .site-windowbar{display:flex;flex:none;height:7cqw}
-    .mobile-site .site-windowbar small{font-size:2.4cqw}
-    .mobile-site .demo-label{font-size:1.9cqw}
-    .mobile-site .window-dots{font-size:1.6cqw}
-    .mobile-site .demo-nav{height:12cqw;padding-inline:5cqw}
-    .mobile-site .demo-nav>b{gap:2cqw;font-size:3.7cqw}
-    .mobile-site .demo-nav i{width:7cqw;height:7cqw;font-size:3.3cqw}
-    .mobile-site .demo-nav b small{font-size:2.2cqw}
-    .mobile-site .demo-nav>div{display:flex;font-size:2.2cqw}
-    .mobile-site .demo-menu{display:none}
-    .mobile-site .demo-main{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
-    .mobile-site .demo-copy{align-self:center;padding:5cqw}
-    .mobile-site .demo-copy>small{font-size:2cqw;letter-spacing:.09em}
-    .mobile-site .demo-copy h3{font-size:7.3cqw;margin:3cqw 0}
-    .mobile-site .demo-copy p{font-size:2.7cqw;margin-bottom:3cqw}
-    .mobile-site .demo-button{padding:2cqw;font-size:2.1cqw}
-    .mobile-site .demo-photo{grid-column:2;grid-row:1;min-height:0}
-    .mobile-site .demo-photo img{object-position:50% 57%}
-    .mobile-site .demo-services{grid-column:1 / -1;grid-row:2;grid-template-columns:1fr 1fr;gap:4cqw;padding:4cqw 6cqw}
-    .mobile-site .demo-services>div+div{padding-left:4cqw;border-left:1px solid #e0e6dc}
-    .mobile-site .demo-services small{font-size:1.9cqw}
-    .mobile-site .demo-services b{font-size:3cqw}
-    .mobile-site .demo-services span{display:block;font-size:2cqw}
-    .mobile-site .demo-next{display:flex;font-size:1.8cqw;padding:3cqw 6cqw}
+    .site-showcase{max-width:620px;margin-inline:auto}
+    .portfolio-stack{aspect-ratio:1.22}
+    .preview-1{width:96%}
+    .preview-2{width:72%}
+    .has-third{aspect-ratio:1.08}
+    figcaption{margin-top:22px}
   }
 </style>
