@@ -1,95 +1,64 @@
 import { test, expect } from '@playwright/test';
 
-const widths = [320, 360, 390, 440, 640, 899, 900, 1024, 1280, 1440];
-
+const widths = [320, 360, 390, 440, 640, 768, 899, 900, 1024, 1280, 1600];
 for (const width of widths) {
-  test(`hero preview at ${width}px`, async ({ page }, testInfo) => {
-    await page.setViewportSize({ width, height: 1100 });
+  test(`Personal service hero at ${width}px`, async ({ page }, testInfo) => {
+    await page.setViewportSize({ width, height: width < 900 ? 844 : 900 });
     await page.goto('/');
     await page.addStyleTag({ content: 'astro-dev-toolbar{display:none!important}' });
-    const showcase = page.locator('.site-showcase');
-    await expect(showcase).toHaveRole('img');
-    await expect(showcase).toHaveAccessibleName(/Beispielwebsite.*fiktiven Betrieb Hansen Haustechnik/);
-    await expect(showcase.locator('a, button, input, select, textarea, [tabindex]')).toHaveCount(0);
-    const phone = page.locator('.mobile-site');
-    const box = await phone.boundingBox();
-    const ratio = box.height / box.width;
+    const hero = page.locator('.hero');
+    const showcase = hero.locator('.site-showcase');
+    await expect(hero.locator('h1')).toHaveText('Ihre Website.Ich kümmere mich um den Rest.');
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
-    if (width < 900) {
-      await expect(page.locator('.desktop-site')).toBeHidden();
-      await expect(showcase.locator('.preview-frame:visible')).toHaveCount(1);
-      await expect(phone.locator('.site-windowbar')).toBeVisible();
-      await expect(phone.locator('.site-windowbar')).toContainText('hansen-haustechnik.example');
-      expect(ratio).toBeGreaterThanOrEqual(1.1);
-      expect(ratio).toBeLessThanOrEqual(1.3);
-      expect(Math.abs(box.x + box.width / 2 - width / 2)).toBeLessThan(1);
-    } else {
-      await expect(showcase.locator('.preview-frame:visible')).toHaveCount(2);
-      expect(box.width).toBeGreaterThanOrEqual(164);
-      expect(ratio).toBeGreaterThanOrEqual(2);
-      expect(ratio).toBeLessThanOrEqual(2.2);
-      await expect(phone.locator('.site-windowbar')).toBeHidden();
-      const desktop = await page.locator('.desktop-site').boundingBox();
-      expect(desktop.width / desktop.height).toBeGreaterThanOrEqual(1.48);
-      expect(desktop.width / desktop.height).toBeLessThanOrEqual(1.52);
-      expect(box.x).toBeLessThan(desktop.x + desktop.width);
-      expect(box.y).toBeLessThan(desktop.y + desktop.height);
-      const lines = await phone.locator('h3').evaluate(el => el.getBoundingClientRect().height / parseFloat(getComputedStyle(el).lineHeight));
-      expect(lines).toBeLessThanOrEqual(3.1);
-      const showcaseBox = await showcase.boundingBox();
-      // The compact desktop composition ends directly beneath the phone.
-      expect(showcaseBox.y + showcaseBox.height - (box.y + box.height)).toBeLessThanOrEqual(24);
+    await expect(showcase.locator('img')).toHaveCount(2);
+    await expect(showcase.locator('.showcase-label')).toHaveText('Website-Beispiele');
+    await expect(hero.locator('.lead')).toHaveText('Ich erstelle Ihre Website und kümmere mich anschließend um Hosting, Pflege und Änderungen.');
+    await expect(hero.locator('.hero-personal')).toHaveText('Direkt mit mir – von der ersten Idee bis zur laufenden Betreuung.');
+    await expect(hero.locator('.hero-assurance')).toHaveCount(0);
+    await expect(hero).not.toContainText(/Demo|\.example/i);
+    // The screenshot's original 72px browser bar must sit entirely above the crop.
+    const crop = await showcase.locator('.preview-crop').boundingBox();
+    const screenshot = await showcase.locator('.preview-crop img').boundingBox();
+    expect(Math.abs(screenshot.y + screenshot.width * 72 / 1200 - crop.y)).toBeLessThan(1);
+    for (const image of await showcase.locator('img').all()) {
+      await expect(image).toHaveJSProperty('complete', true);
+      expect(await image.evaluate(el => el.naturalWidth > 0 && el.currentSrc.startsWith(location.origin))).toBeTruthy();
+      expect(await image.getAttribute('alt')).toBeTruthy();
     }
-
-    for (const frame of await showcase.locator('.preview-frame:visible').all()) {
-      const frameBox = await frame.boundingBox();
-      expect(frameBox.x).toBeGreaterThanOrEqual(0);
-      expect(frameBox.x + frameBox.width).toBeLessThanOrEqual(width);
-      const img = frame.locator('img');
-      await expect(img).toHaveCSS('object-fit', 'cover');
-      expect(await img.evaluate(el => el.complete && el.naturalWidth === 1200 && el.naturalHeight === 1800)).toBeTruthy();
-      expect(await frame.evaluate(el => el.scrollHeight - el.clientHeight)).toBeLessThanOrEqual(1);
-    }
-
-    // Measure every visible demo text fragment, including clipping by its frame
-    // and occlusion by the overlaid phone/request card. Scroll only the showcase
-    // into view so hit tests work for the lower part of the hero on mobile.
-    await showcase.scrollIntoViewIfNeeded();
-    const textProblems = await showcase.evaluate(root => {
-      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-      const problems = [];
-      while (walker.nextNode()) {
-        const node = walker.currentNode;
-        if (!node.textContent.trim() || !node.parentElement.checkVisibility()) continue;
-        const range = document.createRange();
-        range.selectNodeContents(node);
-        const frame = node.parentElement.closest('.preview-frame');
-        const bounds = frame.getBoundingClientRect();
-        for (const rect of range.getClientRects()) {
-          if (!rect.width || !rect.height) continue;
-          if (rect.left < bounds.left - 1 || rect.right > bounds.right + 1 || rect.top < bounds.top - 1 || rect.bottom > bounds.bottom + 1) {
-            problems.push(`clipped: ${node.textContent}`);
-          }
-          const x = rect.left + rect.width / 2, y = rect.top + rect.height / 2;
-          if (y < 0 || y >= innerHeight) continue;
-          const top = document.elementFromPoint(x, y);
-          if (!node.parentElement.contains(top) && !top.contains(node.parentElement)) problems.push(`covered: ${node.textContent}`);
-        }
-      }
-      return problems;
-    });
-    expect(textProblems).toEqual([]);
-
-    // Real CTAs remain separate links, receive focus, and are clickable.
-    for (const link of await page.locator('.hero-copy .button-row a').all()) {
-      await expect(link).toBeVisible();
+    const primary = hero.getByRole('link', { name: 'Website anfragen' });
+    const secondary = hero.getByRole('link', { name: 'So funktioniert’s' });
+    expect((await primary.boundingBox()).y + (await primary.boundingBox()).height).toBeLessThan(844);
+    await expect(primary).toHaveAttribute('href', '#anfrage');
+    await expect(secondary).toHaveAttribute('href', '#ablauf');
+    const copy = await hero.locator('.hero-copy').boundingBox();
+    const artwork = await showcase.boundingBox();
+    if (width < 900) expect(artwork.y).toBeGreaterThan(copy.y + copy.height);
+    else expect(artwork.x).toBeGreaterThan(copy.x + copy.width);
+    for (const link of [primary, secondary]) {
       await link.focus();
       await expect(link).toBeFocused();
+      await expect(link).toHaveCSS('outline-style', 'solid');
       await link.click({ trial: true });
-      expect(await link.evaluate(el => !!el.closest('.site-showcase'))).toBeFalsy();
     }
-    await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); });
-    await page.locator('.hero').screenshot({ path: testInfo.outputPath(`hero-${width}.png`) });
-    await testInfo.attach('preview-metrics', { body: JSON.stringify({ viewport: width, width: box.width, height: box.height, ratio }), contentType: 'application/json' });
+    const before = await showcase.boundingBox();
+    await page.reload();
+    await page.locator('.site-showcase img').evaluateAll(images => Promise.all(images.map(img => img.decode())));
+    const after = await page.locator('.site-showcase').boundingBox();
+    expect(after.height).toBeCloseTo(before.height, 0);
+    await page.addStyleTag({ content: 'astro-dev-toolbar{display:none!important}' });
+    await hero.screenshot({ path: testInfo.outputPath(`hero-${width}.png`) });
+    if (width <= 800) {
+      const menu = page.getByRole('button', { name: 'Menü öffnen' });
+      await menu.click();
+      await expect(menu).toHaveAttribute('aria-expanded', 'true');
+      await page.locator('#main-menu').getByRole('link', { name: 'Leistungen', exact: true }).click();
+      await expect(menu).toHaveAttribute('aria-expanded', 'false');
+    }
+    await secondary.click();
+    await expect(page).toHaveURL(/#ablauf$/);
+    await expect(page.locator('#ablauf')).toBeInViewport();
+    await primary.click();
+    await expect(page).toHaveURL(/#anfrage$/);
+    await expect(page.locator('#anfrage')).toBeInViewport();
   });
 }
