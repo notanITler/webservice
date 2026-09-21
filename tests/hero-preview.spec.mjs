@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const widths = [320, 360, 390, 440, 640, 768, 899, 900, 1024, 1280, 1600];
+const widths = [320, 360, 390, 430, 440, 640, 768, 899, 900, 1024, 1280, 1600];
 for (const width of widths) {
   test(`Personal service hero at ${width}px`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: width < 900 ? 844 : 900 });
@@ -10,10 +10,12 @@ for (const width of widths) {
     const showcase = hero.locator('.site-showcase');
     await expect(hero.locator('h1')).toHaveText('Ihre Website.Ich kümmere mich um den Rest.');
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
-    await expect(showcase.locator('img')).toHaveCount(2);
+    await expect(showcase.locator('img')).toHaveCount(3);
+    await expect(showcase.locator('.preview-2 .project-header')).toBeVisible();
     await expect(showcase.locator('.showcase-label')).toHaveText('Website-Beispiele');
     await expect(hero.locator('.lead')).toHaveText('Ich erstelle Ihre Website und kümmere mich anschließend um Hosting, Pflege und Änderungen.');
-    await expect(hero.locator('.hero-personal')).toHaveText('Direkt mit mir – von der ersten Idee bis zur laufenden Betreuung.');
+    await expect(hero.locator('.hero-personal')).toHaveCount(0);
+    await expect(hero).not.toContainText('Direkt mit mir');
     await expect(hero.locator('.hero-assurance')).toHaveCount(0);
     await expect(hero).not.toContainText(/Demo|\.example/i);
     // The screenshot's original 72px browser bar must sit entirely above the crop.
@@ -30,6 +32,15 @@ for (const width of widths) {
     expect((await primary.boundingBox()).y + (await primary.boundingBox()).height).toBeLessThan(844);
     await expect(primary).toHaveAttribute('href', '#anfrage');
     await expect(secondary).toHaveAttribute('href', '#ablauf');
+    // Original Brandt subline ends 376px down in the 1000px-wide captured hero.
+    const brandt = await showcase.locator('.preview-2 img:not(.project-header)').boundingBox();
+    const hansen = await showcase.locator('.preview-1').boundingBox();
+    expect(brandt.y + brandt.width * 376 / 1000).toBeLessThan(hansen.y);
+    expect((await primary.boundingBox()).height).toBeGreaterThanOrEqual(44);
+    if (width <= 440) {
+      expect((await primary.boundingBox()).height).toBeLessThanOrEqual(48);
+      expect((await showcase.boundingBox()).y).toBeLessThan(width === 440 ? 455 : 495);
+    }
     const copy = await hero.locator('.hero-copy').boundingBox();
     const artwork = await showcase.boundingBox();
     if (width < 900) expect(artwork.y).toBeGreaterThan(copy.y + copy.height);

@@ -6,12 +6,16 @@ interface PortfolioPreview {
   width: number;
   height: number;
   browserBarHeight?: number;
+  headerSrc?: string;
+  headerAlt?: string;
+  headerHeight?: number;
 }
 // Add a final Praxis screenshot here when available; SVG concept art is not a screenshot.
 const additionalPreview: PortfolioPreview | undefined = undefined;
 const projects: PortfolioPreview[] = [
   { name: 'Hansen Haustechnik', src: '/images/cases/hansen-haustechnik/desktop.webp', alt: 'Hansen Haustechnik: warmer Website-Entwurf mit Badmotiv und Leistungen.', width: 1200, height: 800, browserBarHeight: 72 },
-  { name: 'Elektro Brandt', src: '/images/hero-brandt/elektro-brandt-desktop.webp', alt: 'Elektro Brandt: dunkler Website-Entwurf mit Elektroinstallation und orangefarbenen Akzenten.', width: 960, height: 675 },
+  // Actual standalone Brandt header and hero, captured from the local project.
+  { name: 'Elektro Brandt', src: '/images/hero-brandt/elektro-brandt-desktop.webp', alt: 'Elektro Brandt: dunkler Website-Entwurf mit Elektroinstallation und orangefarbenen Akzenten.', width: 1000, height: 590, headerSrc: '/images/hero-brandt/elektro-brandt-header.webp', headerAlt: 'Elektro Brandt Wortmarke, Navigation und Projekt-anfragen-Button.', headerHeight: 96 },
   ...(additionalPreview ? [additionalPreview] : []),
 ];
 ---
@@ -19,10 +23,10 @@ const projects: PortfolioPreview[] = [
   <div class:list={['portfolio-stack', { 'has-third': projects.length > 2 }]}>
     {projects.map((project, index) => (
       <div class:list={['preview-frame', `preview-${index + 1}`]}>
+        <div class="preview-chrome" aria-hidden="true"><span>● ● ●</span></div>
+        {project.headerSrc && <img class="project-header" src={project.headerSrc} alt={project.headerAlt} width={project.width} height={project.headerHeight} decoding="async" />}
         {project.browserBarHeight ? (
-          <>
-            <div class="preview-chrome" style={`aspect-ratio:${project.width}/${project.browserBarHeight}`} aria-hidden="true"><span>● ● ●</span></div>
-            {/* Crop only the baked-in browser metadata; keep the shared source asset intact. */}
+          <>            {/* Crop only the baked-in browser metadata; keep the shared source asset intact. */}
             <div class="preview-crop" style={`aspect-ratio:${project.width}/${project.height - project.browserBarHeight}`}>
               <img src={project.src} alt={project.alt} width={project.width} height={project.height} style={`margin-top:-${project.browserBarHeight / project.width * 100}%`} decoding="async" fetchpriority={index === 0 ? 'high' : 'auto'} />
             </div>
@@ -41,15 +45,16 @@ const projects: PortfolioPreview[] = [
 </figure>
 
 <style>
-  .site-showcase{width:100%;min-width:0;margin:0}
-  .portfolio-stack{position:relative;isolation:isolate;aspect-ratio:1.12}
+  .site-showcase{width:100%;min-width:0;margin:0;pointer-events:none}
+  .portfolio-stack{position:relative;isolation:isolate;aspect-ratio:1.02}
   .preview-frame{position:absolute;overflow:hidden;background:white;border:1px solid #cdd8d2;border-radius:7px;box-shadow:0 12px 28px rgba(24,38,31,.1)}
   .preview-frame img{display:block;width:100%;height:auto}
+  .preview-frame .project-header{border-bottom:1px solid #e0e4e1}
   .preview-crop{overflow:hidden;display:flow-root}
-  .preview-chrome{display:flex;align-items:center;padding-inline:3%;background:#eef1ed;color:#aab6ae;container-type:inline-size}
+  .preview-chrome{aspect-ratio:100 / 6;display:flex;align-items:center;padding-inline:3%;background:#eef1ed;color:#aab6ae;container-type:inline-size}
   .preview-chrome span{font-size:1.1cqw;letter-spacing:.5cqw;line-height:1}
   .preview-1{z-index:3;left:0;bottom:0;width:94%}
-  .preview-2{z-index:2;right:0;top:0;width:78%}
+  .preview-2{z-index:2;right:0;top:-8%;width:78%}
   .preview-3{z-index:1;left:0;top:0;width:62%}
   .has-third{aspect-ratio:1}
   .has-third .preview-2{top:12%}
@@ -58,9 +63,9 @@ const projects: PortfolioPreview[] = [
   .showcase-label{display:block;margin-bottom:7px;font-size:.61rem;letter-spacing:.13em;text-transform:uppercase;color:var(--green);font-weight:650}
   @media(max-width:899px){
     .site-showcase{max-width:620px;margin-inline:auto}
-    .portfolio-stack{aspect-ratio:1.22}
+    .portfolio-stack{aspect-ratio:1.01}
     .preview-1{width:96%}
-    .preview-2{width:72%}
+    .preview-2{width:78%}
     .has-third{aspect-ratio:1.08}
     figcaption{margin-top:22px}
   }

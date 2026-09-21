@@ -165,7 +165,6 @@
 @media(prefers-reduced-motion:reduce){.hero-copy .button:hover span{transform:none}}
 .hero-copy .text-link{display:inline-flex;align-items:center;min-height:44px;font-size:.92rem;border-bottom-color:var(--line);transition:color .2s,border-color .2s}
 .hero-copy .text-link:hover{color:var(--green);border-bottom-color:var(--green)}
-.hero-personal{max-width:420px;margin:22px 0 0;font-size:.8rem;line-height:1.6;color:var(--muted)}
 .site-header .brand{display:flex;flex-direction:column;gap:4px;font-size:.61rem;letter-spacing:.16em;line-height:1.1}
 .site-header .brand span{font-size:1.35rem;letter-spacing:-.035em;font-weight:750}
 @media(min-width:900px) and (max-width:1100px){
@@ -174,17 +173,18 @@
   .hero-break{display:none}
 }
 @media(max-width:899px){
-  .hero{padding:42px 0 52px}
-  .hero-grid{grid-template-columns:minmax(0,1fr);gap:38px}
+  .hero{padding:30px 0 48px}
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:24px}
   .hero-copy{max-width:620px;width:100%;margin-inline:auto}
   .hero-copy h1{font-size:clamp(2rem,6.6vw,3.6rem);overflow-wrap:normal}
   .hero-copy .eyebrow{font-size:.6rem;margin-bottom:20px}
   .hero-copy .eyebrow>span{width:18px;margin-right:6px}
-  .hero-copy .lead{font-size:1rem;margin-bottom:22px}
+  .hero-copy .lead{font-size:1rem;margin-bottom:16px}
+  .hero-copy .button{min-height:46px;padding:10px 18px}
 }
 @media(max-width:440px){
-  .hero-copy .button-row{align-items:flex-start;flex-direction:column;gap:8px}
-  .hero-copy .button{min-height:48px;font-size:.92rem}
+  .hero-copy .button-row{align-items:flex-start;flex-direction:column;gap:4px}
+  .hero-copy .button{min-height:46px;font-size:.92rem}
   .hero-copy .text-link{font-size:.88rem}
   .hero-copy .eyebrow{letter-spacing:.07em}
 }
